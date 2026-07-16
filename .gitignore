@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.astro/
+.DS_Store
+playwright-report/
+test-results/
+402_I_Can_t_Believe_It_s_Not_B.pdf
+.superpowers/
+docs/superpowers/

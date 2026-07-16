@@ -1,0 +1,19 @@
+---
+import Section from '../components/Section.astro';
+import SiteLayout from '../layouts/SiteLayout.astro';
+---
+
+<SiteLayout
+  title="Page not found | ICBINBio"
+  description="The requested ICBINBio page could not be found."
+  noindex
+>
+  <Section narrow>
+    <div class="page-intro">
+      <p class="eyebrow">404</p>
+      <h1>Page not found</h1>
+      <p class="lead">The workshop is real. This page isn’t.</p>
+      <p><a class="button-link" href="/">Back to the workshop</a></p>
+    </div>
+  </Section>
+</SiteLayout>

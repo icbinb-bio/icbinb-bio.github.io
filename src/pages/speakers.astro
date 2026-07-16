@@ -1,0 +1,18 @@
+---
+import PageIntro from '../components/PageIntro.astro';
+import ProfileGrid from '../components/ProfileGrid.astro';
+import Section from '../components/Section.astro';
+import { workshop } from '../data/workshop';
+import SiteLayout from '../layouts/SiteLayout.astro';
+---
+
+<SiteLayout title="Speakers | ICBINBio 2026" description="Confirmed invited speakers for ICBINBio at NeurIPS 2026.">
+  <PageIntro
+    eyebrow="Invited program"
+    title="Speakers"
+    lead="Five perspectives spanning genomics, health, pathology, biomedicine, and protein evolution."
+  />
+  <Section>
+    <ProfileGrid people={workshop.speakers} kind="speaker" />
+  </Section>
+</SiteLayout>

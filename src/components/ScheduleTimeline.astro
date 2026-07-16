@@ -1,0 +1,12 @@
+---
+import { workshop } from '../data/workshop';
+---
+
+<ol class="schedule-list">
+  {workshop.schedule.map((item) => (
+    <li class:list={['schedule-item', `category-${item.category}`]}>
+      <span class="schedule-time">{item.time}</span>
+      <span>{item.title}</span>
+    </li>
+  ))}
+</ol>

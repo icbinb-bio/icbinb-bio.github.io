@@ -1,0 +1,40 @@
+---
+import Notice from '../components/Notice.astro';
+import PageIntro from '../components/PageIntro.astro';
+import ScheduleTimeline from '../components/ScheduleTimeline.astro';
+import Section from '../components/Section.astro';
+import SiteLayout from '../layouts/SiteLayout.astro';
+import { workshop } from '../data/workshop';
+
+type ScheduleDateLabel = 'In-person workshop';
+
+const requireDate = (label: ScheduleDateLabel) => {
+  const date = workshop.dates.find((item) => item.label === label);
+  if (!date) throw new Error(`Missing required workshop date: ${label}`);
+  return date;
+};
+
+const workshopDate = requireDate('In-person workshop');
+const workshopNote = 'note' in workshopDate ? workshopDate.note : undefined;
+if (!workshopNote) throw new Error('Missing required workshop date note: In-person workshop');
+if (workshopDate.value !== workshop.venue.month) {
+  throw new Error('The in-person workshop date must match workshop.venue.month');
+}
+if (workshopNote !== workshop.venue.detail) {
+  throw new Error('The in-person workshop note must match workshop.venue.detail');
+}
+---
+
+<SiteLayout title="Schedule | ICBINBio 2026" description="Tentative full-day ICBINBio workshop schedule.">
+  <PageIntro
+    eyebrow="Full-day workshop"
+    title="Tentative Schedule"
+    lead="Talks, posters, and moderated discussion are structured around collective failure analysis."
+  />
+  <Section narrow>
+    <Notice label={workshop.venue.noticeLabel}>
+      The workshop will take place in {workshop.venue.month}. {workshop.venue.publicDetail}
+    </Notice>
+    <ScheduleTimeline />
+  </Section>
+</SiteLayout>

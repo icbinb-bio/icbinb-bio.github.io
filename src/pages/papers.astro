@@ -1,0 +1,35 @@
+---
+import Notice from '../components/Notice.astro';
+import PageIntro from '../components/PageIntro.astro';
+import Section from '../components/Section.astro';
+import SiteLayout from '../layouts/SiteLayout.astro';
+import { workshop } from '../data/workshop';
+
+type PapersDateLabel = 'Acceptance notification';
+
+const requireDate = (label: PapersDateLabel) => {
+  const date = workshop.dates.find((item) => item.label === label);
+  if (!date) throw new Error(`Missing required workshop date: ${label}`);
+  return date;
+};
+
+const notificationDate = requireDate('Acceptance notification');
+if (!notificationDate.tentative) {
+  throw new Error('Acceptance notification must remain tentative until organizers confirm it');
+}
+---
+
+<SiteLayout title="Papers | ICBINBio 2026" description="Accepted ICBINBio papers and awards.">
+  <PageIntro
+    eyebrow="Workshop program"
+    title="Papers"
+    lead="Accepted work will be collected here after decisions are released."
+  />
+  <Section narrow>
+    <Notice label="Forthcoming after notification">
+      Papers, spotlights, posters, and awards will be announced after the tentative notification date,
+      currently {notificationDate.value}.
+    </Notice>
+    <p class="centered"><a class="button-link" href="/submit/">View submission details</a></p>
+  </Section>
+</SiteLayout>

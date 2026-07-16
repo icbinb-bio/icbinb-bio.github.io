@@ -1,0 +1,18 @@
+---
+import PageIntro from '../components/PageIntro.astro';
+import ProfileGrid from '../components/ProfileGrid.astro';
+import Section from '../components/Section.astro';
+import { workshop } from '../data/workshop';
+import SiteLayout from '../layouts/SiteLayout.astro';
+---
+
+<SiteLayout title="Organizers | ICBINBio 2026" description="Organizing committee for ICBINBio at NeurIPS 2026.">
+  <PageIntro
+    eyebrow="Organizing committee"
+    title="Organizers"
+    lead="Researchers across machine learning, genomics, single-cell biology, and explainable clinical AI."
+  />
+  <Section>
+    <ProfileGrid people={workshop.organizers} kind="organizer" />
+  </Section>
+</SiteLayout>

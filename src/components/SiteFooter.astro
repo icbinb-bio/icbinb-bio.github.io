@@ -1,0 +1,18 @@
+---
+import { workshop } from '../data/workshop';
+---
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <p>
+      Questions? <a href={`mailto:${workshop.contact}`}>{workshop.contact}</a>
+    </p>
+    <p class="footer-links">
+      <a href={workshop.links.mailingList}>ICBINB mailing list</a>
+      <span class="footer-separator" aria-hidden="true">·</span>
+      <a href={workshop.links.x}>X</a>
+      <span class="footer-separator" aria-hidden="true">·</span>
+      <a href={workshop.links.bluesky}>Bluesky</a>
+    </p>
+  </div>
+</footer>

@@ -1,0 +1,14 @@
+---
+import { workshop } from '../data/workshop';
+---
+
+<div class="date-grid">
+  {workshop.dates.map((date) => (
+    <article class="date-card">
+      <p class="date-label">{date.label}</p>
+      <p class="date-value">{date.value}</p>
+      {'note' in date && date.note && <p class="date-note">{date.note}</p>}
+      {date.tentative && <span class="status-label">Tentative</span>}
+    </article>
+  ))}
+</div>

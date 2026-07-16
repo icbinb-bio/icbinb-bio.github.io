@@ -1,0 +1,76 @@
+---
+import { workshop } from '../data/workshop';
+
+const pathname = Astro.url.pathname;
+const isActive = (href: string) =>
+  href === '/' ? pathname === '/' : pathname.startsWith(href);
+---
+
+<header class="site-header">
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <div class="header-inner">
+    <button
+      class="menu-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="primary-navigation"
+      aria-label="Open navigation"
+      data-menu-toggle
+    >
+      <span></span><span></span><span></span>
+    </button>
+    <a class="brand" href="/" aria-label="ICBINBio home">
+      <img src="/images/icbinb-wordmark.png" alt="ICBINB" width="188" height="54" />
+      <span>NeurIPS Workshop 2026</span>
+    </a>
+    <nav id="primary-navigation" class="primary-nav" aria-label="Primary navigation" data-navigation>
+      <ul>
+        {workshop.navigation.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              class:list={{ active: !item.external && isActive(item.href) }}
+              aria-current={!item.external && isActive(item.href) ? 'page' : undefined}
+              target={item.external ? '_blank' : undefined}
+              rel={item.external ? 'noreferrer' : undefined}
+            >
+              {item.label}
+              {item.external && <span class="visually-hidden"> (external)</span>}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+  const navigation = document.querySelector<HTMLElement>('[data-navigation]');
+
+  const closeMenu = () => {
+    if (!toggle || !navigation) return;
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', 'Open navigation');
+    navigation.removeAttribute('data-open');
+  };
+
+  toggle?.addEventListener('click', () => {
+    if (!navigation) return;
+    const opening = toggle.getAttribute('aria-expanded') !== 'true';
+    toggle.setAttribute('aria-expanded', String(opening));
+    toggle.setAttribute('aria-label', opening ? 'Close navigation' : 'Open navigation');
+    navigation.toggleAttribute('data-open', opening);
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && toggle?.getAttribute('aria-expanded') === 'true') {
+      closeMenu();
+      toggle?.focus();
+    }
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth >= 1181) closeMenu();
+  });
+</script>

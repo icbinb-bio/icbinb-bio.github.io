@@ -1,0 +1,59 @@
+---
+import Notice from '../components/Notice.astro';
+import PageIntro from '../components/PageIntro.astro';
+import Section from '../components/Section.astro';
+import SiteLayout from '../layouts/SiteLayout.astro';
+import { workshop } from '../data/workshop';
+
+type ReviewerDateLabel = 'Review period';
+
+const requireDate = (label: ReviewerDateLabel) => {
+  const date = workshop.dates.find((item) => item.label === label);
+  if (!date) throw new Error(`Missing required workshop date: ${label}`);
+  return date;
+};
+
+const reviewDate = requireDate('Review period');
+---
+
+<SiteLayout
+  title="Reviewer Guidelines | ICBINBio 2026"
+  description="Preliminary reviewing criteria and conflict guidance for ICBINBio 2026."
+>
+  <PageIntro
+    eyebrow="Peer review"
+    title="Reviewer Guidelines"
+    lead="Constructive reviews should test whether each submission’s evidence supports its biological claims."
+  />
+  <Section narrow>
+    <Notice label="Preliminary guidance">
+      Reviewer assignments, the full program committee, and the final OpenReview timeline will be announced.
+    </Notice>
+    <div class="prose">
+      <h2>Reviewer responsibilities</h2>
+      <ul>
+        <li>Submit timely, substantive, and constructive reviews.</li>
+        <li>Evaluate the work in the context of its biological task and data.</li>
+        <li>Separate predictive evidence from mechanistic or deployment claims.</li>
+        <li>Declare conflicts and protect double-blind confidentiality.</li>
+      </ul>
+      <h2>Evaluation criteria</h2>
+      <ul>
+        <li>Clarity of the problem and claims.</li>
+        <li>Technical rigour and reproducibility.</li>
+        <li>Faithfulness to the biological setting.</li>
+        <li>Depth of failure analysis.</li>
+        <li>Quality of empirical documentation.</li>
+      </ul>
+      <h2>Conflicts of interest</h2>
+      <p>
+        OpenReview profiles will identify recent co-authorship and institutional conflicts. When an organizer
+        has a conflict, a conflict-free two-person group from the program committee will make the final decision.
+      </p>
+      <h2>Review timeline</h2>
+      <p>The tentative review period is {reviewDate.value}.</p>
+      <h2>Program committee</h2>
+      <p>Full public names and profile links will be announced after confirmation.</p>
+    </div>
+  </Section>
+</SiteLayout>

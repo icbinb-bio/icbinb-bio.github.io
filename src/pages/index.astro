@@ -1,0 +1,76 @@
+---
+import DateGrid from '../components/DateGrid.astro';
+import Section from '../components/Section.astro';
+import TopicGrid from '../components/TopicGrid.astro';
+import SiteLayout from '../layouts/SiteLayout.astro';
+import { workshop } from '../data/workshop';
+---
+
+<SiteLayout title={`${workshop.shortName} | NeurIPS 2026`} description={workshop.tagline}>
+  <div class="home-hero">
+    <img
+      class="hero-banner"
+      src="/images/icbinb-banner.jpg"
+      alt="I Can't Believe It's Not Better waveform banner"
+      width="1280"
+      height="364"
+    />
+    <div class="hero-copy">
+      <h1>{workshop.name}</h1>
+      <p class="eyebrow hero-event">{workshop.eventLine}</p>
+      <p class="tagline">{workshop.tagline}</p>
+    </div>
+  </div>
+
+  <Section labelledby="key-dates">
+    <div class="section-heading centered">
+      <p class="eyebrow">Plan ahead</p>
+      <h2 id="key-dates">Key Dates</h2>
+      <p>All deadlines are 11:59 p.m. Anywhere on Earth and remain subject to final confirmation.</p>
+    </div>
+    <DateGrid />
+  </Section>
+
+  <Section surface="warm" narrow labelledby="why">
+    <div class="section-heading">
+      <p class="eyebrow">Why this workshop</p>
+      <h2 id="why">Benchmarks are only the beginning.</h2>
+    </div>
+    <div class="prose">
+      <p>
+        AI is reshaping genomics, cellular modeling, structural biology, and therapeutic discovery.
+        Yet strong benchmark results often fail to survive new mutations, perturbations, individuals,
+        assays, or deployment settings.
+      </p>
+      <p>
+        This full-day workshop brings machine learning and life science researchers together to study
+        those failures directly: what breaks, why it breaks, how we should evaluate it, and what more
+        reliable scientific systems require.
+      </p>
+    </div>
+  </Section>
+
+  <Section labelledby="topics" motif>
+    <div class="section-heading">
+      <p class="eyebrow">Workshop themes</p>
+      <h2 id="topics">Where biological AI meets reality</h2>
+    </div>
+    <TopicGrid />
+  </Section>
+
+  <Section surface="warm" narrow labelledby="initiative">
+    <div class="section-heading">
+      <p class="eyebrow">Part of ICBINB</p>
+      <h2 id="initiative">Better science through honest failure analysis</h2>
+    </div>
+    <div class="prose">
+      <p>
+        I Can’t Believe It’s Not Better creates space for negative results, unexpectedly strong simple
+        baselines, failed generalization, and benchmark designs that do not support the claims made from them.
+      </p>
+      <p>
+        <a class="text-cta" href="/submit/">Read the call for papers <span aria-hidden="true">→</span></a>
+      </p>
+    </div>
+  </Section>
+</SiteLayout>

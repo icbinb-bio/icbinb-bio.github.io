@@ -1,0 +1,16 @@
+---
+interface Props {
+  surface?: 'white' | 'warm';
+  narrow?: boolean;
+  motif?: boolean;
+  labelledby?: string;
+}
+
+const { surface = 'white', narrow = false, motif = false, labelledby } = Astro.props;
+---
+
+<section class:list={['section', `surface-${surface}`, { narrow, motif }]} aria-labelledby={labelledby}>
+  <div class="section-inner">
+    <slot />
+  </div>
+</section>

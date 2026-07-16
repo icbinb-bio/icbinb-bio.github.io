@@ -1,0 +1,92 @@
+---
+import Notice from '../components/Notice.astro';
+import PageIntro from '../components/PageIntro.astro';
+import Section from '../components/Section.astro';
+import SiteLayout from '../layouts/SiteLayout.astro';
+import { workshop } from '../data/workshop';
+
+type SubmitDateLabel =
+  | 'Paper submission'
+  | 'Review period'
+  | 'Acceptance notification'
+  | 'Camera-ready & poster';
+
+const requireDate = (label: SubmitDateLabel) => {
+  const date = workshop.dates.find((item) => item.label === label);
+  if (!date) throw new Error(`Missing required workshop date: ${label}`);
+  return date;
+};
+
+const submissionDate = requireDate('Paper submission');
+const reviewDate = requireDate('Review period');
+const notificationDate = requireDate('Acceptance notification');
+const cameraReadyDate = requireDate('Camera-ready & poster');
+const submissionNote = 'note' in submissionDate ? submissionDate.note : undefined;
+if (!submissionNote) throw new Error('Missing required workshop date note: Paper submission');
+const submissionDeadlineNote = submissionNote.replace(/\bAoE\b/, 'Anywhere on Earth');
+---
+
+<SiteLayout
+  title="Call for Papers | ICBINBio 2026"
+  description="Submit work on negative results and failure modes of AI in realistic biological settings."
+>
+  <PageIntro
+    eyebrow="Submissions"
+    title="Call for Papers"
+    lead="We invite rigorous accounts of where biological AI systems fail—and what those failures teach us."
+  />
+  <Section narrow>
+    <Notice label="Submission site coming soon">
+      The OpenReview portal will appear here after final configuration. The tentative deadline is {submissionDate.value}.
+    </Notice>
+    <div class="prose">
+      <h2>What we are looking for</h2>
+      <p>
+        We welcome empirical negative results, unexpected model behavior, and careful analyses of
+        distribution shift, confounding, weak supervision, resource constraints, benchmark misalignment,
+        uncertainty, causal learning, and adaptive strategies in biological applications.
+      </p>
+      <h2>Full papers</h2>
+      <p>Full submissions may use up to eight pages, excluding references and appendices, and should include:</p>
+      <ul>
+        <li>A clear biological task, data modality, and modeling approach.</li>
+        <li>Empirical or theoretical evidence of a negative or unexpected outcome.</li>
+        <li>Analysis of the model, data, experimental, or deployment causes.</li>
+        <li>Reproducible and well-documented results.</li>
+      </ul>
+      <h2>Tiny papers</h2>
+      <p>
+        Tiny papers may use up to four pages. They must state the problem and provide empirical evidence
+        of at least one negative outcome, even when the full causal analysis is still developing.
+      </p>
+      <h2>Formatting and review</h2>
+      <ul>
+        <li>Use the NeurIPS 2026 LaTeX style.</li>
+        <li>Submissions are double-blind; linked material must also preserve anonymity.</li>
+        <li>Accepted papers will appear on OpenReview, and the workshop remains non-archival.</li>
+        <li>Concurrent submissions are welcome when they comply with the target venue’s policy.</li>
+      </ul>
+      <h2>Eligibility</h2>
+      <p>
+        Submissions are considered only if the work has not been accepted for publication in previous
+        conference proceedings.
+      </p>
+      <h2>Evaluation criteria</h2>
+      <ul>
+        <li>Clarity of the problem and claims.</li>
+        <li>Technical rigour and reproducibility.</li>
+        <li>Faithfulness to the biological setting.</li>
+        <li>Depth of failure analysis.</li>
+        <li>Quality of empirical documentation.</li>
+      </ul>
+      <h2>Tentative dates</h2>
+      <dl class="definition-list">
+        <div><dt>Submission</dt><dd>{submissionDate.value}</dd></div>
+        <div><dt>Review</dt><dd>{reviewDate.value}</dd></div>
+        <div><dt>Notification</dt><dd>{notificationDate.value}</dd></div>
+        <div><dt>Camera-ready & poster</dt><dd>{cameraReadyDate.value}</dd></div>
+      </dl>
+      <p>All deadlines are {submissionDeadlineNote}.</p>
+    </div>
+  </Section>
+</SiteLayout>

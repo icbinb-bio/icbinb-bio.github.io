@@ -127,6 +127,34 @@ beforeAll(() => {
 });
 
 describe('generated site shell', () => {
+  test('defines the computational-biology visual tokens', () => {
+    const cssSource = readFileSync(resolve('src/styles/global.css'), 'utf8');
+
+    for (const declaration of [
+      '--canvas: #f7faf8',
+      '--ink: #15251f',
+      '--heading: #103d32',
+      '--link: #0b6b58',
+      '--accent: #2a9d78',
+      '--surface: #eaf4ef',
+      '--sage: #a9c8bb',
+      '--divider: rgb(16 61 50 / 18%)',
+    ]) {
+      expect(cssSource).toContain(declaration);
+    }
+    expect(cssSource).not.toMatch(/--(?:warm|taupe|blue)\s*:/);
+    expect(cssSource).toContain('ui-monospace');
+  });
+
+  test('publishes the deep-green browser theme color', () => {
+    const themeColor = openingTagsFor(htmlFor('/'), 'meta').find(
+      (tag) => attributeFor(tag, 'name') === 'theme-color',
+    );
+
+    expect(themeColor).toBeDefined();
+    expect(attributeFor(themeColor!, 'content')).toBe('#103d32');
+  });
+
   test('wires the skip link, menu button, and primary navigation', () => {
     const html = htmlFor('/');
     const skipLink = elementsFor(html, 'a').find(({ openingTag }) =>
@@ -196,13 +224,12 @@ describe('generated site shell', () => {
 
   test('renders the shared footer and exact neutral workshop status', () => {
     const html = htmlFor('/');
-    const mailingListLink = elementsFor(html, 'a').find(
-      ({ innerHtml }) => visibleTextFor(innerHtml) === 'ICBINB mailing list',
-    );
-    expect(mailingListLink).toBeDefined();
-    expect(attributeFor(mailingListLink!.openingTag, 'href')).toBe(
-      'https://groups.google.com/g/icbinb',
-    );
+    expect(html).toContain('Community channels to be announced.');
+    expect(html).toContain('mailto:icbinbio@gmail.com');
+    expect(html).not.toContain('cant.believe.it.is.not.better@gmail.com');
+    expect(html).not.toContain('https://groups.google.com/g/icbinb');
+    expect(html).not.toContain('https://x.com/ICBINBWorkshop');
+    expect(html).not.toContain('https://bsky.app/profile/icbinb.bsky.social');
     expect(html).toContain('NeurIPS Workshop 2026');
     expect(html).toMatch(/<p\b[^>]*>\s*Workshop at NeurIPS 2026\s*<\/p>/);
     expect(html).not.toMatch(/accepted/i);
@@ -240,11 +267,20 @@ describe('generated site shell', () => {
 
   test('renders the complete homepage identity', () => {
     const html = htmlFor('/');
+    const source = readFileSync(resolve('src/components/SiteHeader.astro'), 'utf8');
+    const wordmark = elementsFor(html, 'span').find(({ openingTag }) =>
+      classNamesFor(openingTag).includes('brand-wordmark'),
+    );
+    expect(wordmark).toBeDefined();
+    expect(decodeHtmlText(wordmark!.innerHtml.replace(/<[^>]+>/g, ''))).toBe('ICBINBIO');
     expect(html).toContain("I Can't Believe It's Not Better");
     expect(html).toContain('Failure Modes of AI in Biology');
     expect(html).toContain('Workshop at NeurIPS 2026');
+    expect(html).toContain('official biology branch');
+    expect(html).toContain('own identity and program');
     expect(html).not.toMatch(/accepted workshop/i);
     expect(html).toContain('Stress-testing AI for biology in the real world');
+    expect(source).not.toContain('/images/icbinb-wordmark.png');
   });
 
   test('renders the centralized workshop title before the event line', () => {
@@ -456,9 +492,10 @@ test('builds a noindex custom 404 without canonical or URL metadata', () => {
 });
 
 test('ships local brand assets', () => {
-  for (const path of ['public/images/icbinb-wordmark.png', 'public/images/icbinb-banner.jpg', 'public/images/favicon.png']) {
+  for (const path of ['public/images/icbinb-banner.jpg', 'public/images/favicon.png']) {
     expect(existsSync(resolve(path))).toBe(true);
   }
+  expect(existsSync(resolve('public/images/icbinb-wordmark.png'))).toBe(false);
 });
 
 test('uses the official Astro Pages actions', () => {

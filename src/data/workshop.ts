@@ -30,7 +30,7 @@ export const workshop = {
   eventLine: 'Workshop at NeurIPS 2026',
   tagline:
     'Stress-testing AI for biology in the real world: failure modes, robustness, and trustworthy scientific discovery.',
-  contact: 'cant.believe.it.is.not.better@gmail.com',
+  contact: 'icbinbio@gmail.com',
   venue: {
     month: 'December 2026',
     status: 'To be announced',
@@ -228,9 +228,4 @@ export const workshop = {
       ],
     },
   ] satisfies Person[],
-  links: {
-    mailingList: 'https://groups.google.com/g/icbinb',
-    x: 'https://x.com/ICBINBWorkshop',
-    bluesky: 'https://bsky.app/profile/icbinb.bsky.social',
-  },
 };

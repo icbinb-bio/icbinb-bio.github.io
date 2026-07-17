@@ -63,11 +63,13 @@ describe('workshop data', () => {
     );
   });
 
-  test('keeps navigation authoritative for the initiative link', () => {
-    expect(workshop.links).toEqual({
-      mailingList: 'https://groups.google.com/g/icbinb',
-      x: 'https://x.com/ICBINBWorkshop',
-      bluesky: 'https://bsky.app/profile/icbinb.bsky.social',
+  test('keeps contact and initiative links authoritative', () => {
+    expect(workshop.contact).toBe('icbinbio@gmail.com');
+    expect('links' in workshop).toBe(false);
+    expect(workshop.navigation.at(-1)).toEqual({
+      label: 'ICBINB',
+      href: 'https://icbinb.cc/',
+      external: true,
     });
   });
 });

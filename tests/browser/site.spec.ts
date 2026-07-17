@@ -79,7 +79,7 @@ test('skip link reaches main content', async ({ page }) => {
   expect(Number.parseFloat(outline.width)).toBeGreaterThanOrEqual(3);
 });
 
-test('small accent text meets AA contrast on white and warm surfaces', async ({ page }) => {
+test('small accent text meets AA contrast on canvas and surface backgrounds', async ({ page }) => {
   await page.goto('/');
   const samples = await page.locator('.eyebrow, .topic-grid span').evaluateAll((elements) =>
     elements.map((element) => {
@@ -98,19 +98,46 @@ test('small accent text meets AA contrast on white and warm surfaces', async ({ 
   );
 
   expect(samples.length).toBeGreaterThan(0);
-  expect(samples.some(({ background }) => background === 'rgb(255, 255, 255)')).toBe(true);
-  expect(samples.some(({ background }) => background === 'rgb(241, 239, 238)')).toBe(true);
+  expect(samples.some(({ background }) => background === 'rgb(247, 250, 248)')).toBe(true);
+  expect(samples.some(({ background }) => background === 'rgb(234, 244, 239)')).toBe(true);
   for (const sample of samples) {
     expect(contrastRatio(sample.foreground, sample.background)).toBeGreaterThanOrEqual(4.5);
   }
 });
 
+test('applies the computational-biology palette to the page and wordmark', async ({ page }) => {
+  await page.goto('/');
+  const theme = await page.evaluate(() => ({
+    bodyBackground: getComputedStyle(document.body).backgroundColor,
+    wordmarkColor: getComputedStyle(document.querySelector('.brand-wordmark')!).color,
+    bioColor: getComputedStyle(document.querySelector('.brand-bio')!).color,
+  }));
+
+  expect(theme.bodyBackground).toBe('rgb(247, 250, 248)');
+  expect(theme.wordmarkColor).toBe('rgb(16, 61, 50)');
+  expect(theme.bioColor).toBe('rgb(42, 157, 120)');
+});
+
+test('blends the banner field into the green page canvas', async ({ page }) => {
+  await page.goto('/');
+  const rendering = await page.locator('.hero-banner').evaluate((banner) => ({
+    blendMode: getComputedStyle(banner).mixBlendMode,
+    pageBackground: getComputedStyle(document.body).backgroundColor,
+  }));
+
+  expect(rendering.pageBackground).toBe('rgb(247, 250, 248)');
+  expect(rendering.blendMode).toBe('multiply');
+});
+
 test('brand and text CTA meet the 44px touch-target minimum at 390px', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/');
+  const wordmark = page.locator('.brand-wordmark');
   const brand = await page.locator('.brand').boundingBox();
   const textCta = await page.locator('.text-cta').boundingBox();
 
+  await expect(wordmark).toBeVisible();
+  await expect(wordmark).toHaveText('ICBINBIO');
   expect(brand).not.toBeNull();
   expect(textCta).not.toBeNull();
   expect(brand!.height).toBeGreaterThanOrEqual(44);
@@ -124,9 +151,9 @@ test('short navigation, profile, and footer links meet the 44px touch-target min
   const homeLink = page
     .getByRole('navigation', { name: 'Primary navigation' })
     .getByRole('link', { name: 'Home', exact: true });
-  const xLink = page.locator('.footer-links').getByRole('link', { name: 'X', exact: true });
+  const emailLink = page.getByRole('link', { name: 'icbinbio@gmail.com', exact: true });
 
-  for (const target of [homeLink, xLink]) {
+  for (const target of [homeLink, emailLink]) {
     const box = await target.boundingBox();
     expect(box).not.toBeNull();
     expect(box!.width).toBeGreaterThanOrEqual(44);
@@ -193,26 +220,15 @@ test('button and text CTAs have contrast-safe hover feedback', async ({ page }) 
   expect(contrastRatio(textAfter.foreground, textAfter.background)).toBeGreaterThanOrEqual(4.5);
 });
 
-test('footer links and separators wrap with readable spacing', async ({ page }) => {
+test('footer exposes the workshop email and pending community status', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/');
-  const linkRow = page.locator('.footer-links');
+  const emailLink = page.getByRole('link', { name: 'icbinbio@gmail.com', exact: true });
+  const communityStatus = page.locator('.community-status');
 
-  await expect(linkRow).toHaveCount(1);
-  await expect(linkRow.locator('.footer-separator')).toHaveCount(2);
-  const style = await linkRow.evaluate((element) => {
-    const computed = getComputedStyle(element);
-    return {
-      display: computed.display,
-      flexWrap: computed.flexWrap,
-      columnGap: computed.columnGap,
-      rowGap: computed.rowGap,
-    };
-  });
-  expect(style.display).toBe('flex');
-  expect(style.flexWrap).toBe('wrap');
-  expect(Number.parseFloat(style.columnGap)).toBeGreaterThanOrEqual(8);
-  expect(Number.parseFloat(style.rowGap)).toBeGreaterThan(0);
+  await expect(emailLink).toHaveAttribute('href', 'mailto:icbinbio@gmail.com');
+  await expect(communityStatus).toHaveText('Community channels to be announced.');
+  await expect(communityStatus.getByRole('link')).toHaveCount(0);
 });
 
 test('reduced-motion preference disables smooth scrolling', async ({ page }) => {

@@ -1,13 +1,13 @@
 :root {
-  --canvas: #ffffff;
-  --ink: #1c1c1c;
-  --heading: #493b31;
-  --taupe: #cec3ba;
-  --warm: #f1efee;
+  --canvas: #f7faf8;
+  --ink: #15251f;
+  --heading: #103d32;
+  --link: #0b6b58;
+  --accent: #2a9d78;
+  --surface: #eaf4ef;
+  --sage: #a9c8bb;
+  --divider: rgb(16 61 50 / 18%);
   --off-white: #f9f9f9;
-  --link: #1155cc;
-  --divider: rgb(0 0 0 / 15%);
-  --blue: #2e8bcb;
   --content: 1280px;
   --reading: 760px;
   font-family: 'Roboto', Arial, sans-serif;
@@ -40,7 +40,7 @@ a {
 
 a:focus-visible,
 button:focus-visible {
-  outline: 3px solid var(--blue);
+  outline: 3px solid var(--accent);
   outline-offset: 3px;
 }
 
@@ -81,7 +81,7 @@ img {
   position: sticky;
   z-index: 20;
   top: 0;
-  background: rgb(255 255 255 / 96%);
+  background: rgb(247 250 248 / 96%);
   border-bottom: 1px solid var(--divider);
   backdrop-filter: blur(12px);
 }
@@ -110,8 +110,19 @@ img {
   white-space: nowrap;
 }
 
-.brand img {
-  width: 8rem;
+.brand-wordmark {
+  color: var(--heading);
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.brand-bio {
+  color: var(--accent);
+}
+
+.brand-context {
+  font-size: 0.9rem;
 }
 
 .primary-nav {
@@ -168,7 +179,7 @@ img {
 
 .site-footer {
   padding-block: 2rem;
-  background: var(--warm);
+  background: var(--surface);
   border-top: 1px solid var(--divider);
 }
 
@@ -180,14 +191,6 @@ img {
 
 .footer-inner p {
   margin: 0;
-}
-
-.footer-links {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  column-gap: 0.75rem;
-  row-gap: 0.25rem;
 }
 
 @media (max-width: 1180px) {
@@ -232,17 +235,13 @@ img {
   .primary-nav a:hover,
   .primary-nav a.active {
     color: var(--off-white);
-    border-left: 0.5rem solid var(--taupe);
+    border-left: 0.5rem solid var(--sage);
   }
 }
 
 @media (max-width: 560px) {
-  .brand span {
+  .brand-context {
     display: none;
-  }
-
-  .brand img {
-    width: 7.2rem;
   }
 
   .footer-inner {
@@ -260,7 +259,7 @@ img {
 }
 
 main:focus {
-  outline: 3px solid var(--blue);
+  outline: 3px solid var(--accent);
   outline-offset: -3px;
 }
 
@@ -278,6 +277,7 @@ main:focus {
 .hero-banner {
   width: 100%;
   border-bottom: 1px solid var(--divider);
+  mix-blend-mode: multiply;
 }
 
 .hero-copy {
@@ -285,6 +285,14 @@ main:focus {
   margin-inline: auto;
   padding-block: clamp(3rem, 8vw, 7rem);
   text-align: center;
+}
+
+.eyebrow,
+.date-label,
+.status-label,
+.topic-grid span {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
+    'Courier New', monospace;
 }
 
 .eyebrow {
@@ -351,15 +359,17 @@ h2 {
   width: 8rem;
   height: 10rem;
   pointer-events: none;
-  opacity: 0.45;
+  opacity: 0.55;
   background:
-    radial-gradient(circle at 18% 22%, var(--blue) 0 3px, transparent 4px),
-    radial-gradient(circle at 76% 68%, var(--blue) 0 3px, transparent 4px),
-    linear-gradient(140deg, transparent 48%, var(--taupe) 49%, var(--taupe) 51%, transparent 52%);
+    radial-gradient(circle at 25% 30%, var(--accent) 0 2px, transparent 3px),
+    radial-gradient(circle at 75% 70%, var(--accent) 0 2px, transparent 3px),
+    linear-gradient(var(--divider) 1px, transparent 1px),
+    linear-gradient(90deg, var(--divider) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 2rem 2rem, 2rem 2rem;
 }
 
 .surface-warm {
-  background: var(--warm);
+  background: var(--surface);
 }
 
 .section.narrow .section-inner {
@@ -466,7 +476,7 @@ h2 {
   display: inline-block;
   margin-top: 1rem;
   padding: 0.22rem 0.5rem;
-  background: var(--warm);
+  background: var(--surface);
   color: var(--heading);
   font-size: 0.72rem;
   font-weight: 700;
@@ -505,8 +515,8 @@ h2 {
   gap: 1rem;
   margin-bottom: 3rem;
   padding: 1.25rem;
-  background: var(--warm);
-  border-left: 0.35rem solid var(--taupe);
+  background: var(--surface);
+  border-left: 0.35rem solid var(--sage);
 }
 
 .notice strong {
@@ -554,7 +564,7 @@ h2 {
 }
 
 .schedule-item.category-break {
-  background: var(--warm);
+  background: var(--surface);
 }
 
 .profile-grid {
@@ -588,9 +598,9 @@ h2 {
   height: 5rem;
   place-items: center;
   margin-bottom: 1.5rem;
-  background: var(--warm);
+  background: var(--surface);
   color: var(--heading);
-  border: 1px solid var(--taupe);
+  border: 1px solid var(--sage);
   border-radius: 50%;
   font-size: 1.35rem;
   font-weight: 700;

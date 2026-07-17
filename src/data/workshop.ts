@@ -26,11 +26,11 @@ export interface ScheduleItem {
 
 export const workshop = {
   name: "I Can't Believe It's Not Better: Failure Modes of AI in Biology",
-  shortName: 'ICBINBio',
+  shortName: 'ICBINB-BIO',
   eventLine: 'Workshop at NeurIPS 2026',
   tagline:
     'Stress-testing AI for biology in the real world: failure modes, robustness, and trustworthy scientific discovery.',
-  contact: 'icbinbio@gmail.com',
+  contact: 'icbinbbio@gmail.com',
   venue: {
     month: 'December 2026',
     status: 'To be announced',

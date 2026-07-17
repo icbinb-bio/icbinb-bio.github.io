@@ -59,11 +59,27 @@ test('private proposal has one exact ignore rule and remains local', () => {
   expect(existsSync(resolve(proposalFilename))).toBe(true);
 });
 
-test('private package metadata is explicit in the manifest and lockfile root', () => {
+test('package, repository, and canonical metadata use the renamed branch identity', () => {
   const manifest = JSON.parse(readFileSync(resolve('package.json'), 'utf8'));
   const lockfile = JSON.parse(readFileSync(resolve('package-lock.json'), 'utf8'));
+  const astroConfig = readFileSync(resolve('astro.config.mjs'), 'utf8');
 
-  expect(manifest.description).toBe('Official website for the ICBINBio NeurIPS 2026 workshop.');
+  expect.soft(manifest.name).toBe('icbinb-bio-website');
+  expect.soft(manifest.description).toBe(
+    'Official website for the ICBINB-BIO NeurIPS 2026 workshop.',
+  );
+  expect.soft(manifest.repository.url).toBe(
+    'git+https://github.com/icbinb-bio/icbinb-bio.github.io.git',
+  );
+  expect.soft(manifest.bugs.url).toBe(
+    'https://github.com/icbinb-bio/icbinb-bio.github.io/issues',
+  );
+  expect.soft(manifest.homepage).toBe(
+    'https://github.com/icbinb-bio/icbinb-bio.github.io#readme',
+  );
   expect(manifest.license).toBe('UNLICENSED');
+  expect.soft(lockfile.name).toBe('icbinb-bio-website');
+  expect.soft(lockfile.packages[''].name).toBe('icbinb-bio-website');
   expect(lockfile.packages[''].license).toBe('UNLICENSED');
+  expect.soft(astroConfig).toContain("site: 'https://icbinb-bio.github.io'");
 });

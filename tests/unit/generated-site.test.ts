@@ -73,6 +73,24 @@ const visibleTextFor = (html: string) => {
   return textFor(withoutHiddenText);
 };
 
+const titleTextsFor = (html: string) =>
+  elementsFor(html, 'title').map(({ innerHtml }) => textFor(innerHtml));
+
+const metaContentsFor = (html: string, attributeName: string, attributeValue: string) =>
+  openingTagsFor(html, 'meta')
+    .filter((tag) => attributeFor(tag, attributeName) === attributeValue)
+    .map((tag) => attributeFor(tag, 'content') ?? '');
+
+const wordmarkTextsFor = (html: string) =>
+  elementsFor(html, 'span')
+    .filter(({ openingTag }) => classNamesFor(openingTag).includes('brand-wordmark'))
+    .map(({ innerHtml }) => decodeHtmlText(innerHtml.replace(/<[^>]+>/g, '')));
+
+const linkHrefsFor = (html: string) =>
+  openingTagsFor(html, 'a')
+    .map((tag) => attributeFor(tag, 'href'))
+    .filter((href): href is string => href !== undefined);
+
 const relTokensFor = (openingTag: string) =>
   (attributeFor(openingTag, 'rel') ?? '').split(/\s+/).filter(Boolean);
 
@@ -225,7 +243,8 @@ describe('generated site shell', () => {
   test('renders the shared footer and exact neutral workshop status', () => {
     const html = htmlFor('/');
     expect(html).toContain('Community channels to be announced.');
-    expect(html).toContain('mailto:icbinbio@gmail.com');
+    expect(html).toContain('mailto:icbinbbio@gmail.com');
+    expect(html).not.toContain('icbinbio@gmail.com');
     expect(html).not.toContain('cant.believe.it.is.not.better@gmail.com');
     expect(html).not.toContain('https://groups.google.com/g/icbinb');
     expect(html).not.toContain('https://x.com/ICBINBWorkshop');
@@ -237,11 +256,7 @@ describe('generated site shell', () => {
 
   test('provides the exact canonical URL', () => {
     const html = htmlFor('/');
-    const canonicalLinks = openingTagsFor(html, 'link').filter((tag) =>
-      relTokensFor(tag).includes('canonical'),
-    );
-    expect(canonicalLinks).toHaveLength(1);
-    expect(attributeFor(canonicalLinks[0], 'href')).toBe('https://icbinbio.github.io/');
+    expect(canonicalHrefsFor(html)).toEqual(['https://icbinb-bio.github.io/']);
   });
 
   test('keeps the mobile navigation scrollable within viewport bounds', () => {
@@ -272,7 +287,7 @@ describe('generated site shell', () => {
       classNamesFor(openingTag).includes('brand-wordmark'),
     );
     expect(wordmark).toBeDefined();
-    expect(decodeHtmlText(wordmark!.innerHtml.replace(/<[^>]+>/g, ''))).toBe('ICBINBIO');
+    expect(decodeHtmlText(wordmark!.innerHtml.replace(/<[^>]+>/g, ''))).toBe('ICBINB-BIO');
     expect(html).toContain("I Can't Believe It's Not Better");
     expect(html).toContain('Failure Modes of AI in Biology');
     expect(html).toContain('Workshop at NeurIPS 2026');
@@ -322,6 +337,40 @@ const administrativeRoutes = [
   ['/reviewer-guidelines/', 'Reviewer Guidelines'],
 ] as const;
 
+const publicRouteMetadata = [
+  [
+    '/',
+    'ICBINB-BIO | NeurIPS 2026',
+    'Stress-testing AI for biology in the real world: failure modes, robustness, and trustworthy scientific discovery.',
+  ],
+  [
+    '/submit/',
+    'Call for Papers | ICBINB-BIO 2026',
+    'Submit work on negative results and failure modes of AI in realistic biological settings.',
+  ],
+  [
+    '/speakers/',
+    'Speakers | ICBINB-BIO 2026',
+    'Confirmed invited speakers for ICBINB-BIO at NeurIPS 2026.',
+  ],
+  [
+    '/schedule/',
+    'Schedule | ICBINB-BIO 2026',
+    'Tentative full-day ICBINB-BIO workshop schedule.',
+  ],
+  ['/papers/', 'Papers | ICBINB-BIO 2026', 'Accepted ICBINB-BIO papers and awards.'],
+  [
+    '/reviewer-guidelines/',
+    'Reviewer Guidelines | ICBINB-BIO 2026',
+    'Preliminary reviewing criteria and conflict guidance for ICBINB-BIO 2026.',
+  ],
+  [
+    '/organizers/',
+    'Organizers | ICBINB-BIO 2026',
+    'Organizing committee for ICBINB-BIO at NeurIPS 2026.',
+  ],
+] as const;
+
 test.each([
   [
     'src/pages/submit.astro',
@@ -365,8 +414,48 @@ test.each(administrativeRoutes)('renders %s with its exact first h1', (route, he
 
 test.each(administrativeRoutes)('provides the exact canonical URL for %s', (route) => {
   expect(canonicalHrefsFor(htmlFor(route))).toEqual([
-    `https://icbinbio.github.io${route}`,
+    `https://icbinb-bio.github.io${route}`,
   ]);
+});
+
+test.each(publicRouteMetadata)(
+  'publishes the exact identity and metadata contract for %s',
+  (route, title, description) => {
+    const html = htmlFor(route);
+    const canonical = `https://icbinb-bio.github.io${route}`;
+
+    expect(titleTextsFor(html)).toEqual([title]);
+    expect(metaContentsFor(html, 'name', 'description')).toEqual([description]);
+    expect(metaContentsFor(html, 'property', 'og:title')).toEqual([title]);
+    expect(metaContentsFor(html, 'property', 'og:description')).toEqual([description]);
+    expect(canonicalHrefsFor(html)).toEqual([canonical]);
+    expect(metaContentsFor(html, 'property', 'og:url')).toEqual([canonical]);
+    expect(wordmarkTextsFor(html)).toEqual(['ICBINB-BIO']);
+    expect(linkHrefsFor(html).filter((href) => href.startsWith('mailto:'))).toEqual([
+      'mailto:icbinbbio@gmail.com',
+    ]);
+  },
+);
+
+test.each([
+  ['/', () => htmlFor('/')],
+  ['/submit/', () => htmlFor('/submit/')],
+  ['/speakers/', () => htmlFor('/speakers/')],
+  ['/schedule/', () => htmlFor('/schedule/')],
+  ['/papers/', () => htmlFor('/papers/')],
+  ['/reviewer-guidelines/', () => htmlFor('/reviewer-guidelines/')],
+  ['/organizers/', () => htmlFor('/organizers/')],
+  ['404.html', () => readFileSync(resolve('dist/404.html'), 'utf8')],
+] as const)('publishes only the renamed branch identity in %s', (route, readHtml) => {
+  const html = readHtml();
+
+  expect.soft(html.includes('ICBINB-BIO'), `${route} is missing ICBINB-BIO`).toBe(true);
+  expect.soft(html.includes('ICBINBio'), `${route} contains ICBINBio`).toBe(false);
+  expect.soft(html.includes('ICBINBIO'), `${route} contains ICBINBIO`).toBe(false);
+  expect.soft(html.includes('icbinbio@gmail.com'), `${route} contains the old email`).toBe(false);
+  expect
+    .soft(html.includes('https://icbinbio.github.io'), `${route} contains the old canonical domain`)
+    .toBe(false);
 });
 
 test('never emits empty or fake links', () => {
@@ -476,6 +565,8 @@ test('renders all organizers without personal email addresses', () => {
 
 test('builds a noindex custom 404 without canonical or URL metadata', () => {
   const html = readFileSync(resolve('dist/404.html'), 'utf8');
+  const title = 'Page not found | ICBINB-BIO';
+  const description = 'The requested ICBINB-BIO page could not be found.';
   const robots = openingTagsFor(html, 'meta').find(
     (tag) => attributeFor(tag, 'name') === 'robots',
   );
@@ -485,6 +576,14 @@ test('builds a noindex custom 404 without canonical or URL metadata', () => {
 
   expect(html).toContain('Page not found');
   expect(html).toContain('Back to the workshop');
+  expect(titleTextsFor(html)).toEqual([title]);
+  expect(metaContentsFor(html, 'name', 'description')).toEqual([description]);
+  expect(metaContentsFor(html, 'property', 'og:title')).toEqual([title]);
+  expect(metaContentsFor(html, 'property', 'og:description')).toEqual([description]);
+  expect(wordmarkTextsFor(html)).toEqual(['ICBINB-BIO']);
+  expect(linkHrefsFor(html).filter((href) => href.startsWith('mailto:'))).toEqual([
+    'mailto:icbinbbio@gmail.com',
+  ]);
   expect(robots).toBeDefined();
   expect(attributeFor(robots!, 'content')).toBe('noindex');
   expect(canonicalHrefsFor(html)).toEqual([]);

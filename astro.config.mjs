@@ -1,7 +1,7 @@
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
-  site: 'https://icbinbio.github.io',
+  site: 'https://icbinb-bio.github.io',
   output: 'static',
   trailingSlash: 'always',
 });

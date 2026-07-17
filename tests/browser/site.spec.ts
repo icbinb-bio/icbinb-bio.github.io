@@ -133,11 +133,13 @@ test('brand and text CTA meet the 44px touch-target minimum at 390px', async ({ 
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/');
   const wordmark = page.locator('.brand-wordmark');
-  const brand = await page.locator('.brand').boundingBox();
+  const brandLink = page.locator('.brand');
+  const brand = await brandLink.boundingBox();
   const textCta = await page.locator('.text-cta').boundingBox();
 
   await expect(wordmark).toBeVisible();
-  await expect(wordmark).toHaveText('ICBINBIO');
+  await expect(wordmark).toHaveText('ICBINB-BIO');
+  await expect(brandLink).toHaveAccessibleName('ICBINB-BIO home');
   expect(brand).not.toBeNull();
   expect(textCta).not.toBeNull();
   expect(brand!.height).toBeGreaterThanOrEqual(44);
@@ -151,7 +153,7 @@ test('short navigation, profile, and footer links meet the 44px touch-target min
   const homeLink = page
     .getByRole('navigation', { name: 'Primary navigation' })
     .getByRole('link', { name: 'Home', exact: true });
-  const emailLink = page.getByRole('link', { name: 'icbinbio@gmail.com', exact: true });
+  const emailLink = page.getByRole('link', { name: 'icbinbbio@gmail.com', exact: true });
 
   for (const target of [homeLink, emailLink]) {
     const box = await target.boundingBox();
@@ -223,10 +225,10 @@ test('button and text CTAs have contrast-safe hover feedback', async ({ page }) 
 test('footer exposes the workshop email and pending community status', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/');
-  const emailLink = page.getByRole('link', { name: 'icbinbio@gmail.com', exact: true });
+  const emailLink = page.getByRole('link', { name: 'icbinbbio@gmail.com', exact: true });
   const communityStatus = page.locator('.community-status');
 
-  await expect(emailLink).toHaveAttribute('href', 'mailto:icbinbio@gmail.com');
+  await expect(emailLink).toHaveAttribute('href', 'mailto:icbinbbio@gmail.com');
   await expect(communityStatus).toHaveText('Community channels to be announced.');
   await expect(communityStatus.getByRole('link')).toHaveCount(0);
 });

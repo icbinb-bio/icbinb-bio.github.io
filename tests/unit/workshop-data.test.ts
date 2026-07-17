@@ -64,7 +64,8 @@ describe('workshop data', () => {
   });
 
   test('keeps contact and initiative links authoritative', () => {
-    expect(workshop.contact).toBe('icbinbio@gmail.com');
+    expect.soft(workshop.shortName).toBe('ICBINB-BIO');
+    expect.soft(workshop.contact).toBe('icbinbbio@gmail.com');
     expect('links' in workshop).toBe(false);
     expect(workshop.navigation.at(-1)).toEqual({
       label: 'ICBINB',

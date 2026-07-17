@@ -1,7 +1,7 @@
 {
-  "name": "icbinbio-website",
+  "name": "icbinb-bio-website",
   "version": "1.0.0",
-  "description": "Official website for the ICBINBio NeurIPS 2026 workshop.",
+  "description": "Official website for the ICBINB-BIO NeurIPS 2026 workshop.",
   "main": "index.js",
   "directories": {
     "doc": "docs"
@@ -16,16 +16,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/icbinbio/icbinbio.github.io.git"
+    "url": "git+https://github.com/icbinb-bio/icbinb-bio.github.io.git"
   },
   "keywords": [],
   "author": "",
   "license": "UNLICENSED",
   "type": "module",
   "bugs": {
-    "url": "https://github.com/icbinbio/icbinbio.github.io/issues"
+    "url": "https://github.com/icbinb-bio/icbinb-bio.github.io/issues"
   },
-  "homepage": "https://github.com/icbinbio/icbinbio.github.io#readme",
+  "homepage": "https://github.com/icbinb-bio/icbinb-bio.github.io#readme",
   "private": true,
   "engines": {
     "node": ">=24.0.0"

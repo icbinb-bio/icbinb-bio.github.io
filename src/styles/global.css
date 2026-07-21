@@ -590,12 +590,16 @@ h2 {
   min-width: 0;
   padding: 2rem;
   background: var(--canvas);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
 .profile-mark {
   display: grid;
-  width: 5rem;
-  height: 5rem;
+  width: 10rem;
+  height: 10rem;
   place-items: center;
   margin-bottom: 1.5rem;
   background: var(--surface);
@@ -604,6 +608,11 @@ h2 {
   border-radius: 50%;
   font-size: 1.35rem;
   font-weight: 700;
+}
+
+.profile-photo {
+  object-fit: cover;
+  background: var(--surface);
 }
 
 .profile h2 {
@@ -625,6 +634,7 @@ h2 {
 .profile-links {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 1rem;
 }
 

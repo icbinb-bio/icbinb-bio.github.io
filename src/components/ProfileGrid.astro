@@ -12,12 +12,15 @@ const { people, kind } = Astro.props;
 <div class:list={['profile-grid', `profile-grid-${kind}`]}>
   {people.map((person) => (
     <article class="profile">
-      <div class="profile-mark" aria-hidden="true">{person.initials}</div>
+      {person.photo ? (
+        <img class="profile-mark profile-photo" src={person.photo} alt="" loading="lazy" width="160" height="160" />
+      ) : (
+        <div class="profile-mark" aria-hidden="true">{person.initials}</div>
+      )}
       <div class="profile-copy">
         <h2>{person.name}</h2>
         <p class="profile-affiliation">{person.affiliation}</p>
         <p class="profile-focus">{person.focus}</p>
-        <p>{person.bio}</p>
         <p class="profile-links">
           {person.links.map((link) => (
             <a href={link.href} target="_blank" rel="noreferrer">

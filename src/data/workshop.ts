@@ -12,6 +12,7 @@ export interface LinkItem {
 export interface Person {
   name: string;
   initials: string;
+  photo?: string;
   affiliation: string;
   focus: string;
   bio: string;
@@ -142,6 +143,7 @@ export const workshop = {
     {
       name: 'Maria Brbić',
       initials: 'MB',
+      photo: '/images/organizers/maria-brbic.jpg',
       affiliation: 'EPFL',
       focus: 'AI for biology and biomedicine',
       bio: 'Develops AI methods that drive advances in biology and biomedicine.',
@@ -153,6 +155,7 @@ export const workshop = {
     {
       name: 'Peter Koo',
       initials: 'PK',
+      photo: '/images/organizers/peter-koo.jpg',
       affiliation: 'Cold Spring Harbor Laboratory',
       focus: 'Interpretable and generative genomics',
       bio: 'Develops interpretable and generative machine-learning methods for regulatory genomics.',
@@ -175,6 +178,7 @@ export const workshop = {
     {
       name: 'Su-In Lee',
       initials: 'SL',
+      photo: '/images/organizers/su-in-lee.jpg',
       affiliation: 'University of Washington',
       focus: 'Explainable AI · Molecular and clinical applications',
       bio: 'Advances explainable AI principles for molecular biology and clinical medicine.',
@@ -197,6 +201,7 @@ export const workshop = {
     {
       name: 'Masayuki Nagai',
       initials: 'MN',
+      photo: '/images/organizers/masayuki-nagai.jpg',
       affiliation: 'Cold Spring Harbor Laboratory',
       focus: 'Continual learning · Genomic foundation models',
       bio: 'Studies continual learning for genomic foundation models using perturbation data.',

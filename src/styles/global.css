@@ -528,7 +528,8 @@ h2 {
   position: relative;
   padding: 0.5rem 0 0.5rem 1.5rem;
   color: var(--heading);
-  font-weight: 500;
+  font-size: 1.08rem;
+  font-weight: 700;
 }
 
 .topic-list li::before {

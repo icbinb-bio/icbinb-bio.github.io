@@ -18,16 +18,13 @@ const { people, kind } = Astro.props;
         <div class="profile-mark" aria-hidden="true">{person.initials}</div>
       )}
       <div class="profile-copy">
-        <h2>{person.name}</h2>
+        <h2>
+          <a href={person.links.find((link) => link.label === 'Homepage')?.href} target="_blank" rel="noreferrer">
+            {person.name}<span class="visually-hidden"> (opens homepage, external)</span>
+          </a>
+        </h2>
         <p class="profile-affiliation">{person.affiliation}</p>
         <p class="profile-focus">{person.focus}</p>
-        <p class="profile-links">
-          {person.links.map((link) => (
-            <a href={link.href} target="_blank" rel="noreferrer">
-              {link.label}<span class="visually-hidden"> for {person.name} (external)</span>
-            </a>
-          ))}
-        </p>
       </div>
     </article>
   ))}

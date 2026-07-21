@@ -5,11 +5,9 @@ interface Props {
   lead?: string;
 }
 
-const { title, eyebrow, lead } = Astro.props;
+const { title } = Astro.props;
 ---
 
 <header class="page-intro">
-  {eyebrow && <p class="eyebrow">{eyebrow}</p>}
   <h1>{title}</h1>
-  {lead && <p class="lead">{lead}</p>}
 </header>

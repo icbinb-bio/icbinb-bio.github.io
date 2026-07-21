@@ -4,9 +4,13 @@ import Section from '../components/Section.astro';
 import TopicGrid from '../components/TopicGrid.astro';
 import SiteLayout from '../layouts/SiteLayout.astro';
 import { workshop } from '../data/workshop';
+
+const [headlinePrefix, headlineSuffix] = workshop.name.split(': ');
+const [taglinePrefix, taglineSuffix] = workshop.tagline.split('~');
+const cleanTagline = workshop.tagline.replaceAll('~', '');
 ---
 
-<SiteLayout title={`${workshop.shortName} | NeurIPS 2026`} description={workshop.tagline}>
+<SiteLayout title={`${workshop.shortName} | NeurIPS 2026`} description={cleanTagline}>
   <div class="home-hero">
     <img
       class="hero-banner"
@@ -15,16 +19,18 @@ import { workshop } from '../data/workshop';
       width="1280"
       height="364"
     />
+  </div>
+
+  <div class="hero-copy-band">
     <div class="hero-copy">
-      <h1>{workshop.name}</h1>
+      <h1>{headlinePrefix}:<br />{headlineSuffix}</h1>
       <p class="eyebrow hero-event">{workshop.eventLine}</p>
-      <p class="tagline">{workshop.tagline}</p>
+      <p class="tagline">{taglinePrefix}<br />{taglineSuffix}</p>
     </div>
   </div>
 
   <Section labelledby="key-dates">
     <div class="section-heading centered">
-      <p class="eyebrow">Plan ahead</p>
       <h2 id="key-dates">Key Dates</h2>
       <p>All deadlines are 11:59 p.m. Anywhere on Earth and remain subject to final confirmation.</p>
     </div>
@@ -33,7 +39,6 @@ import { workshop } from '../data/workshop';
 
   <Section surface="warm" narrow labelledby="why">
     <div class="section-heading">
-      <p class="eyebrow">Why this workshop</p>
       <h2 id="why">Benchmarks are only the beginning.</h2>
     </div>
     <div class="prose">
@@ -50,24 +55,24 @@ import { workshop } from '../data/workshop';
     </div>
   </Section>
 
-  <Section labelledby="topics" motif>
+  <Section narrow labelledby="topics">
     <div class="section-heading">
-      <p class="eyebrow">Workshop themes</p>
-      <h2 id="topics">Where biological AI meets reality</h2>
+      <h2 id="topics">Topics</h2>
     </div>
     <TopicGrid />
   </Section>
 
   <Section surface="warm" narrow labelledby="initiative">
     <div class="section-heading">
-      <p class="eyebrow">Official biology branch of ICBINB</p>
-      <h2 id="initiative">A distinct home for failure analysis in biological AI</h2>
+      <h2 id="initiative">I Can't Believe It's Not Better Initiative</h2>
     </div>
     <div class="prose">
       <p>
-        ICBINB-BIO is the official biology branch of the broader ICBINB initiative. It has its own
-        identity and program while sharing a commitment to candid failure analysis, negative results,
-        unexpectedly strong simple baselines, and benchmarks that support the claims made from them.
+        This workshop forms one workshop in a series as part of the larger I Can't Believe It's Not
+        Better (ICBINB) activities. ICBINB-BIO is the official biology branch of the broader ICBINB
+        initiative, which shares a commitment to candid failure
+        analysis, negative results, unexpectedly strong simple baselines, and benchmarks that support
+        the claims made from them.
       </p>
       <p>
         <a class="text-cta" href="/submit/">Read the call for papers <span aria-hidden="true">→</span></a>

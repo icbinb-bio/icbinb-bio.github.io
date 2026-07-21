@@ -22,22 +22,22 @@ export interface Person {
 export interface ScheduleItem {
   time: string;
   title: string;
-  category: 'talk' | 'discussion' | 'break' | 'community';
+  category: 'talk' | 'discussion' | 'poster' | 'break' | 'community';
 }
 
 export const workshop = {
   name: "I Can't Believe It's Not Better: Failure Modes of AI in Biology",
   shortName: 'ICBINB-BIO',
-  eventLine: 'Workshop at NeurIPS 2026',
+  eventLine: 'Workshop at NeurIPS 2026 · Sydney',
   tagline:
-    'Stress-testing AI for biology in the real world: failure modes, robustness, and trustworthy scientific discovery.',
+    'Stress-testing AI for biology in the real world: failure modes, robustness, and trustworthy scientific discovery',
   contact: 'icbinbbio@gmail.com',
   venue: {
-    month: 'December 2026',
+    month: 'December 11–12, 2026',
     status: 'To be announced',
-    detail: 'Exact date and location to be announced',
-    noticeLabel: 'Date and venue to be announced',
-    publicDetail: 'The exact workshop date, city, venue, room, and local timezone will be announced.',
+    detail: 'Sydney, Australia · exact date to be confirmed',
+    noticeLabel: 'Exact date to be confirmed',
+    publicDetail: 'The exact date (December 11 or 12), venue, room, and local timezone will be announced.',
   },
   navigation: [
     { label: 'Home', href: '/' },
@@ -54,7 +54,7 @@ export const workshop = {
     { label: 'Review period', value: 'August 29–September 21, 2026', tentative: true },
     { label: 'Acceptance notification', value: 'September 29, 2026', tentative: true },
     { label: 'Camera-ready & poster', value: 'October 20, 2026', tentative: true },
-    { label: 'In-person workshop', value: 'December 2026', note: 'Exact date and location to be announced', tentative: true },
+    { label: 'In-person workshop', value: 'December 11–12, 2026', note: 'Sydney, Australia · exact date to be confirmed', tentative: true },
   ],
   topics: [
     'Out-of-distribution generalization and domain shift',
@@ -73,7 +73,7 @@ export const workshop = {
     { time: '10:00–10:30', title: 'Spotlight talks 1, 2 & 3', category: 'talk' },
     { time: '10:30–10:45', title: 'Moderated spotlight discussion', category: 'discussion' },
     { time: '10:45–11:00', title: 'Coffee break', category: 'break' },
-    { time: '11:00–12:15', title: 'Poster session', category: 'community' },
+    { time: '11:00–12:15', title: 'Poster session', category: 'poster' },
     { time: '12:15–13:00', title: 'Lunch break', category: 'break' },
     { time: '13:00–14:30', title: 'Invited talks 3, 4 & 5', category: 'talk' },
     { time: '14:30–15:00', title: 'Spotlight talks 4, 5 & 6', category: 'talk' },
@@ -83,31 +83,32 @@ export const workshop = {
     { time: '16:30–17:00', title: 'Closing synthesis', category: 'community' },
   ] satisfies ScheduleItem[],
   speakers: [
-    {
-      name: 'Anshul Kundaje',
-      initials: 'AK',
-      affiliation: 'Stanford University',
-      focus: 'Regulatory genomics · Real-world deployment',
-      bio: 'Develops deep-learning methods and interpretation frameworks for biological sequences, molecular interactions, and genetic variation.',
-      links: [
-        { label: 'Homepage', href: 'https://profiles.stanford.edu/anshul-kundaje' },
-        { label: 'ORCID', href: 'https://orcid.org/0000-0003-3084-2287' },
-      ],
-    },
-    {
-      name: 'Marzyeh Ghassemi',
-      initials: 'MG',
-      affiliation: 'MIT',
-      focus: 'Health fairness · Clinical AI',
-      bio: 'Designs robust, private, and fair learning methods for health and studies the evaluation challenges of clinical machine learning.',
-      links: [
-        { label: 'Homepage', href: 'https://healthyml.org/marzyeh/' },
-        { label: 'Google Scholar', href: 'https://scholar.google.com/citations?user=9RyeFYwAAAAJ&hl=en' },
-      ],
-    },
+    // {
+    //   name: 'Anshul Kundaje',
+    //   initials: 'AK',
+    //   affiliation: 'Stanford University',
+    //   focus: 'Regulatory genomics · Real-world deployment',
+    //   bio: 'Develops deep-learning methods and interpretation frameworks for biological sequences, molecular interactions, and genetic variation.',
+    //   links: [
+    //     { label: 'Homepage', href: 'https://profiles.stanford.edu/anshul-kundaje' },
+    //     { label: 'ORCID', href: 'https://orcid.org/0000-0003-3084-2287' },
+    //   ],
+    // },
+    // {
+    //   name: 'Marzyeh Ghassemi',
+    //   initials: 'MG',
+    //   affiliation: 'MIT',
+    //   focus: 'Health fairness · Clinical AI',
+    //   bio: 'Designs robust, private, and fair learning methods for health and studies the evaluation challenges of clinical machine learning.',
+    //   links: [
+    //     { label: 'Homepage', href: 'https://healthyml.org/marzyeh/' },
+    //     { label: 'Google Scholar', href: 'https://scholar.google.com/citations?user=9RyeFYwAAAAJ&hl=en' },
+    //   ],
+    // },
     {
       name: 'Hoifung Poon',
       initials: 'HP',
+      photo: '/images/speakers/hoifung-poon.jpg',
       affiliation: 'Microsoft Research',
       focus: 'Tissue pathology · Virtual patients',
       bio: 'Leads precision-health research spanning causal learning across biological sequences, radiology, pathology, and genomics.',
@@ -119,6 +120,7 @@ export const workshop = {
     {
       name: 'Mihaela van der Schaar',
       initials: 'MS',
+      photo: '/images/speakers/mihaela-van-der-schaar.jpg',
       affiliation: 'University of Cambridge',
       focus: 'Reality-centric biomedicine',
       bio: 'Develops machine-learning methods for medicine and directs the Cambridge Centre for AI in Medicine.',
@@ -127,17 +129,17 @@ export const workshop = {
         { label: 'Google Scholar', href: 'https://scholar.google.com/citations?user=DZ3S--MAAAAJ&hl=en' },
       ],
     },
-    {
-      name: 'Sergey Ovchinnikov',
-      initials: 'SO',
-      affiliation: 'MIT',
-      focus: 'Protein evolution',
-      bio: 'Combines phylogenetic inference, protein structure prediction and design, deep learning, and differentiable programming.',
-      links: [
-        { label: 'Homepage', href: 'https://biology.mit.edu/profile/sergey-ovchinnikov/' },
-        { label: 'Google Scholar', href: 'https://scholar.google.com/citations?user=8KJ9gf4AAAAJ&hl=en' },
-      ],
-    },
+    // {
+    //   name: 'Sergey Ovchinnikov',
+    //   initials: 'SO',
+    //   affiliation: 'MIT',
+    //   focus: 'Protein evolution',
+    //   bio: 'Combines phylogenetic inference, protein structure prediction and design, deep learning, and differentiable programming.',
+    //   links: [
+    //     { label: 'Homepage', href: 'https://biology.mit.edu/profile/sergey-ovchinnikov/' },
+    //     { label: 'Google Scholar', href: 'https://scholar.google.com/citations?user=8KJ9gf4AAAAJ&hl=en' },
+    //   ],
+    // },
   ] satisfies Person[],
   organizers: [
     {
@@ -190,6 +192,7 @@ export const workshop = {
     {
       name: 'Siba Smarak Panigrahi',
       initials: 'SP',
+      photo: '/images/organizers/siba-smarak-panigrahi.jpg',
       affiliation: 'EPFL',
       focus: 'Multimodal single-cell models · Scientific agents',
       bio: 'Develops multimodal models for single-cell multi-omics and benchmarks agentic scientific systems.',

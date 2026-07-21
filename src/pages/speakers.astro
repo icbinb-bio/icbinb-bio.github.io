@@ -1,4 +1,5 @@
 ---
+import Notice from '../components/Notice.astro';
 import PageIntro from '../components/PageIntro.astro';
 import ProfileGrid from '../components/ProfileGrid.astro';
 import Section from '../components/Section.astro';
@@ -13,6 +14,9 @@ import SiteLayout from '../layouts/SiteLayout.astro';
     lead="Five perspectives spanning genomics, health, pathology, biomedicine, and protein evolution."
   />
   <Section>
+    <Notice label="Speaker list in progress">
+      We are finalizing the speaker lineup and will release it here once confirmed.
+    </Notice>
     <ProfileGrid people={workshop.speakers} kind="speaker" />
   </Section>
 </SiteLayout>

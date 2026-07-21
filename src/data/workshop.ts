@@ -199,7 +199,7 @@ export const workshop = {
       ],
     },
     {
-      name: 'Masayuki Nagai',
+      name: 'Masayuki Nagai (Moon)',
       initials: 'MN',
       photo: '/images/organizers/masayuki-nagai.jpg',
       affiliation: 'Cold Spring Harbor Laboratory',

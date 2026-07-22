@@ -362,7 +362,7 @@ const publicRouteMetadata = [
   [
     '/reviewer-guidelines/',
     'Reviewer Guidelines | ICBINB-BIO 2026',
-    'Preliminary reviewing criteria and conflict guidance for ICBINB-BIO 2026.',
+    'Reviewing criteria, ethics, and conflict guidance for ICBINB-BIO at NeurIPS 2026.',
   ],
   [
     '/organizers/',

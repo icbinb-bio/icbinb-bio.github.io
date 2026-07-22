@@ -18,7 +18,7 @@ const reviewDate = requireDate('Review period');
 
 <SiteLayout
   title="Reviewer Guidelines | ICBINB-BIO 2026"
-  description="Preliminary reviewing criteria and conflict guidance for ICBINB-BIO 2026."
+  description="Reviewing criteria, ethics, and conflict guidance for ICBINB-BIO at NeurIPS 2026."
 >
   <PageIntro
     eyebrow="Peer review"
@@ -30,30 +30,153 @@ const reviewDate = requireDate('Review period');
       Reviewer assignments, the full program committee, and the final OpenReview timeline will be announced.
     </Notice>
     <div class="prose">
+      <p>
+        Thank you for agreeing to serve as a reviewer for {workshop.shortName}: {workshop.name} at
+        NeurIPS 2026. Your role is essential in ensuring a high-quality and impactful program, and we
+        appreciate your time and effort in providing thorough and constructive feedback. If you want to be part
+        of the program committee, please fill this <a href="https://forms.gle/5zmezpWHZtiEmmTEA" target="_blank" rel="noreferrer">form</a>.
+      </p>
+
       <h2>Reviewer responsibilities</h2>
+      <p>As a reviewer, we ask that you:</p>
       <ul>
         <li>Submit timely, substantive, and constructive reviews.</li>
+        <li>Adhere to the reviewing guidelines outlined below.</li>
         <li>Evaluate the work in the context of its biological task and data.</li>
         <li>Separate predictive evidence from mechanistic or deployment claims.</li>
         <li>Declare conflicts and protect double-blind confidentiality.</li>
+        <li>
+          Follow the <a href="https://neurips.cc/public/EthicsGuidelines" target="_blank" rel="noreferrer">NeurIPS Code of Ethics</a> and <a href="https://neurips.cc/public/CodeOfConduct" target="_blank" rel="noreferrer">Code of Conduct</a> when assessing submissions.
+        </li>
       </ul>
-      <h2>Evaluation criteria</h2>
+
+      <h2>Main reviewer tasks and timeline</h2>
+      
+      <br>The key tasks are:
+      <ol>
+        <li>
+          <strong>Create or update your OpenReview profile.</strong> Ensure your profile lists your
+          most recent publications. If you do not yet have an OpenReview profile, register with the
+          email address that received the reviewer invitation.
+        </li>
+        <li>
+          <strong>Conduct a thorough review.</strong> Provide clear, constructive, and detailed
+          feedback, evaluating submissions on clarity, problem statement, biological faithfulness, and
+          relevance to the workshop theme. We accept two submission types: full papers (up to eight
+          pages) and tiny papers (up to four pages), excluding references and appendices. Reviewers
+          are not required to read the appendix, but may consult it if helpful.
+        </li>
+        <li>
+          <strong>Provide a final recommendation.</strong> Submit your final review and overall
+          assessment by the end of the review period (refer to the <a href="/">homepage</a>). If you
+          expect not to finish before the deadline, please contact us at {workshop.contact}.
+        </li>
+        <li>
+          <strong>Nominate papers for awards.</strong> Indicate whether a paper should be considered
+          for the Entropic Award (most surprising negative result) or the Didactic Award (most
+          well-explained and pedagogical paper).
+        </li>
+      </ol>
+
+      <h2>Reviewing a submission: step-by-step</h2>
+      <p><strong>1. Read the paper carefully</strong></p>
       <ul>
-        <li>Clarity of the problem and claims.</li>
-        <li>Technical rigour and reproducibility.</li>
-        <li>Faithfulness to the biological setting.</li>
-        <li>Depth of failure analysis.</li>
-        <li>Quality of empirical documentation.</li>
+        <li>
+          Understand the research question, biological setting, data modality, and assumptions behind
+          the investigation of an AI system’s limitations or failures.
+        </li>
+        <li>Identify the negative or unexpected outcome and assess how well the paper investigates it.</li>
+        <li>
+          Assess how clearly and thoroughly the paper characterizes this limitation or failure mode.
+        </li>
       </ul>
+      <p><strong>2. Assess the paper using these criteria</strong></p>
+      <ul>
+        <li>
+          <strong>Clarity of the problem and claims.</strong> Is the biological task, modeling
+          approach, and claimed failure mode clearly stated?
+        </li>
+        <li>
+          <strong>Technical rigour and reproducibility.</strong> Are methods and conclusions
+          well-supported by evidence? Are results documented carefully enough to reproduce?
+        </li>
+        <li>
+          <strong>Depth of failure analysis.</strong> Does the paper go beyond reporting a bad number
+          to characterize causes (model, data, experimental design, or deployment)?
+        </li>
+        <li>
+          <strong>Novelty and significance of the negative result.</strong> Does the paper offer new
+          insight into where AI for biology fails or misleads?
+        </li>
+        <li>
+          <strong>Alignment with workshop topics.</strong> Does the paper present a reasonable
+          argument aligned with failure modes of AI in biology? Submissions that primarily report
+          improved state-of-the-art performance without meaningful analysis of limitations or failures
+          should receive a lower score on workshop alignment.
+        </li>
+      </ul>
+      <p><strong>3. Write a constructive review and submit it before the deadline</strong></p>
+      <p>Your review should include:</p>
+      <ul>
+        <li>A short summary of the paper’s contributions and key findings.</li>
+        <li>Strengths and weaknesses of the submission.</li>
+        <li>Your recommendation with justification according to the criteria above.</li>
+        <li>Optional feedback to help authors improve their work.</li>
+        <li>
+          Award nomination, when applicable: whether the paper is a strong candidate for the Entropic
+          Award or the Didactic Award.
+        </li>
+      </ul>
+
       <h2>Conflicts of interest</h2>
       <p>
-        OpenReview profiles will identify recent co-authorship and institutional conflicts. When an organizer
-        has a conflict, a conflict-free two-person group from the program committee will make the final decision.
+        OpenReview profiles will identify recent co-authorship and institutional conflicts. When an
+        organizer has a conflict, a conflict-free two-person group from the program committee will make
+        the final decision.
       </p>
+
+      <h2>Code of Ethics</h2>
+      <p>
+        (Adapted from the NeurIPS reviewer guidance.) 
+        <br>All NeurIPS participants, including workshop
+        reviewers, are required to adhere to the <a href="https://neurips.cc/public/EthicsGuidelines" target="_blank" rel="noreferrer">NeurIPS Code of Ethics</a> and the <a href="https://neurips.cc/public/CodeOfConduct" target="_blank" rel="noreferrer">NeurIPS Code of Conduct</a>. Reviewers should read both and apply them throughout paper assessment and discussion.
+      </p>
+      <p>
+        As part of the review process, reviewers are asked to raise potential violations of the NeurIPS
+        Code of Ethics. Authors are encouraged to discuss ethics questions in their submission; such
+        discussion is not counted against the page limit and should appear as a separate section when
+        included.
+      </p>
+
+      <h2>Use of large language models (LLMs)</h2>
+      <p>
+        (Adapted from NeurIPS reviewing practice.) 
+        <br>The use of LLMs is allowed as a general-purpose
+        writing assistance tool. Reviewers remain fully responsible for content written under their
+        name, including LLM-generated text that could constitute plagiarism, scientific misconduct, or
+        low quality (for example, fabrication of facts). Reviews that exhibit such issues may be flagged
+        as low quality.
+      </p>
+
+      <h2>General reviewing standards</h2>
+      <p>
+        For additional guidance on reviewing standards, including how NeurIPS interprets quality,
+        clarity, significance, and originality for negative-results contributions: see the <a
+          href="https://neurips.cc/Conferences/2026/ReviewerGuidelines"
+          target="_blank"
+          rel="noreferrer">NeurIPS 2026 Reviewer Guidelines</a>.
+      </p>
+
       <h2>Review timeline</h2>
       <p>The tentative review period is {reviewDate.value}.</p>
+
       <h2>Program committee</h2>
       <p>Full public names and profile links will be announced after confirmation.</p>
+
+      <p>
+        We appreciate your contributions to making this workshop valuable and insightful. Please reach
+        out at {workshop.contact} with any questions. Thank you for supporting the review process.
+      </p>
     </div>
   </Section>
 </SiteLayout>

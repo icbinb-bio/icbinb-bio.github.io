@@ -33,7 +33,7 @@ export const workshop = {
     'Stress-testing AI for biology in the real world ~failure modes, robustness, and trustworthy scientific discovery~',
   contact: 'icbinbbio@gmail.com',
   venue: {
-    month: 'December 11–12, 2026',
+    month: 'December 11-12, 2026',
     status: 'To be announced',
     detail: 'Sydney, Australia · exact date to be confirmed',
     noticeLabel: 'Exact date to be confirmed',
@@ -51,10 +51,10 @@ export const workshop = {
   ] satisfies NavItem[],
   dates: [
     { label: 'Paper submission', value: 'August 29, 2026', note: '11:59 p.m. AoE', tentative: true },
-    { label: 'Review period', value: 'August 29–September 21, 2026', tentative: true },
+    { label: 'Review period', value: 'August 29 - September 21, 2026', tentative: true },
     { label: 'Acceptance notification', value: 'September 29, 2026', tentative: true },
     { label: 'Camera-ready & poster', value: 'October 20, 2026', tentative: true },
-    { label: 'In-person workshop', value: 'December 11–12, 2026', note: 'Sydney, Australia · exact date to be confirmed', tentative: true },
+    { label: 'In-person workshop', value: 'December 11-12, 2026', note: 'Sydney, Australia · exact date to be confirmed', tentative: true },
   ],
   topics: [
     'Out-of-distribution generalization and domain shift',

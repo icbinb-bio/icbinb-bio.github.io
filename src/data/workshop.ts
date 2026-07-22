@@ -227,6 +227,7 @@ export const workshop = {
     {
       name: 'Soham Gadgil',
       initials: 'SG',
+      photo: '/images/organizers/soham-gadgil.jpg',
       affiliation: 'University of Washington',
       focus: 'Explainable clinical foundation models',
       bio: 'Develops explainable AI methods that connect clinical foundation models to human-understandable concepts.',

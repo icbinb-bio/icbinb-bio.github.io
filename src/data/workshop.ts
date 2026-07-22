@@ -219,7 +219,7 @@ export const workshop = {
       initials: 'OB',
       photo: '/images/organizers/ozgur-yilmaz-beker.png',
       affiliation: 'Columbia University',
-      focus: 'Probabilistic single-cell models',
+      focus: 'Probabilistic single-cell models · Biophysical emulation',
       bio: 'Develops probabilistic models for multi-condition single-cell omics and interpretable conditional effects.',
       links: [
         { label: 'Homepage', href: 'https://zgr2788.github.io/' },

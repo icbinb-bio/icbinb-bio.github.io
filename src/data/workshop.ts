@@ -169,6 +169,7 @@ export const workshop = {
     {
       name: 'Bianca M. Dumitrascu',
       initials: 'BD',
+      photo: '/images/organizers/bianca-dumitrascu.jpg',
       affiliation: 'Columbia University',
       focus: 'Machine learning · Genetics · Spatial systems',
       bio: 'Studies how local molecular rules give rise to emergent spatial patterns in biological dynamical systems.',
@@ -214,14 +215,15 @@ export const workshop = {
       ],
     },
     {
-      name: 'Ozgur Yilmaz Beker',
+      name: 'Ozgur Yilmaz Beker (Oz)',
       initials: 'OB',
+      photo: '/images/organizers/ozgur-yilmaz-beker.png',
       affiliation: 'Columbia University',
       focus: 'Probabilistic single-cell models',
       bio: 'Develops probabilistic models for multi-condition single-cell omics and interpretable conditional effects.',
       links: [
-        { label: 'Homepage', href: 'https://cancerdynamics.columbia.edu/ozgur-beker' },
-        { label: 'ORCID', href: 'https://orcid.org/0000-0001-6226-7235' },
+        { label: 'Homepage', href: 'https://zgr2788.github.io/' },
+        { label: 'Google Scholar', href: 'https://scholar.google.com/citations?user=VZaP4FIAAAAJ&hl=en&oi=ao' },
       ],
     },
     {

@@ -205,8 +205,8 @@ img {
   color: var(--accent);
 }
 
-.community-status {
-  color: var(--sage);
+.footer-inner .footer-contact {
+  margin-left: auto;
 }
 
 @media (max-width: 1180px) {
@@ -617,6 +617,20 @@ h2 {
 
 .profile-grid-organizer {
   grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.organizer-acknowledgement {
+  margin-top: 2.5rem;
+  text-align: center;
+}
+
+.organizer-acknowledgement h2 {
+  font-size: 1.65rem;
+  letter-spacing: -0.01em;
+}
+
+.organizer-acknowledgement p {
+  margin: 0.75rem 0 0;
 }
 
 .profile-grid-speaker .profile:last-child:nth-child(odd) {

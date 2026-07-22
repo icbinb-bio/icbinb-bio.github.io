@@ -171,7 +171,7 @@ export const workshop = {
       initials: 'BD',
       photo: '/images/organizers/bianca-dumitrascu.jpg',
       affiliation: 'Columbia University',
-      focus: 'Machine learning · Genetics · Spatial systems',
+      focus: 'Physical AI · Probabilistic machine learning · Spatiotemporal biology',
       bio: 'Studies how local molecular rules give rise to emergent spatial patterns in biological dynamical systems.',
       links: [
         { label: 'Homepage', href: 'https://www.morpho-lab.com/bianca.html' },

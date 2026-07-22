@@ -387,6 +387,8 @@ test.each([
       'August 29 - September 21, 2026',
       'September 29, 2026',
       'October 20, 2026',
+      'December 11 or 12, 2026',
+      'December 11/12, 2026',
       'December 11-12, 2026',
     ],
     ['.value', '.note'],

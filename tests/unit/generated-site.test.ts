@@ -374,8 +374,21 @@ const publicRouteMetadata = [
 test.each([
   [
     'src/pages/submit.astro',
-    ['Paper submission', 'Review period', 'Acceptance notification', 'Camera-ready & poster'],
-    ['August 29, 2026', 'August 29–September 21, 2026', 'September 29, 2026', 'October 20, 2026'],
+    [
+      'Paper submission',
+      'Review period',
+      'Acceptance notification',
+      'Camera-ready & poster',
+      'In-person workshop',
+    ],
+    [
+      'August 29, 2026',
+      'August 29–September 21, 2026',
+      'August 29 - September 21, 2026',
+      'September 29, 2026',
+      'October 20, 2026',
+      'December 11-12, 2026',
+    ],
     ['.value', '.note'],
   ],
   [
@@ -462,7 +475,10 @@ test('never emits empty or fake links', () => {
   for (const [route] of administrativeRoutes) {
     expect(invalidHrefValuesFor(htmlFor(route))).toEqual([]);
   }
-  expect(htmlFor('/submit/')).toContain('Submission site coming soon');
+  expect(htmlFor('/submit/')).toContain('OpenReview is open');
+  expect(htmlFor('/submit/')).toContain(
+    'https://openreview.net/group?id=NeurIPS.cc/2026/Workshop/ICBINB-BIO',
+  );
 });
 
 test('publishes submission eligibility and all evaluation criteria', () => {

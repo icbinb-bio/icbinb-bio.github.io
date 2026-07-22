@@ -9,7 +9,8 @@ type SubmitDateLabel =
   | 'Paper submission'
   | 'Review period'
   | 'Acceptance notification'
-  | 'Camera-ready & poster';
+  | 'Camera-ready & poster'
+  | 'In-person workshop';
 
 const requireDate = (label: SubmitDateLabel) => {
   const date = workshop.dates.find((item) => item.label === label);
@@ -21,9 +22,14 @@ const submissionDate = requireDate('Paper submission');
 const reviewDate = requireDate('Review period');
 const notificationDate = requireDate('Acceptance notification');
 const cameraReadyDate = requireDate('Camera-ready & poster');
+const workshopDate = requireDate('In-person workshop');
 const submissionNote = 'note' in submissionDate ? submissionDate.note : undefined;
 if (!submissionNote) throw new Error('Missing required workshop date note: Paper submission');
 const submissionDeadlineNote = submissionNote.replace(/\bAoE\b/, 'Anywhere on Earth');
+
+const openReviewUrl = 'https://openreview.net/group?id=NeurIPS.cc/2026/Workshop/ICBINB-BIO';
+const latexTemplateUrl =
+  'https://drive.google.com/file/d/1YM_VG1bk6mokRHFwC69Z_nJnAJFvbHu0/view?usp=drive_link';
 ---
 
 <SiteLayout
@@ -36,41 +42,111 @@ const submissionDeadlineNote = submissionNote.replace(/\bAoE\b/, 'Anywhere on Ea
     lead="We invite rigorous accounts of where biological AI systems fail—and what those failures teach us."
   />
   <Section narrow>
-    <Notice label="Submission site coming soon">
-      The OpenReview portal will appear here after final configuration. The tentative deadline is {submissionDate.value}.
+    <Notice label="OpenReview is open">
+      Submit via the <a href={openReviewUrl} target="_blank" rel="noreferrer">ICBINB-BIO OpenReview portal</a>. The
+      submission deadline is {submissionDate.value}.
     </Notice>
+    <p class="centered">
+      <a class="button-link" href={openReviewUrl} target="_blank" rel="noreferrer">Submit on OpenReview</a>
+    </p>
     <div class="prose">
       <h2>What we are looking for</h2>
+      <p>
+        The I Can't Believe It's Not Better (ICBINB) initiative invites submissions to {workshop.shortName}
+        at NeurIPS 2026 in Sydney, dedicated to negative results and rigorous evidence of where AI systems for
+        biology fails. We welcome researchers and practitioners who can share <strong>unexpected challenges in
+        developing, evaluating, and deploying models on biological tasks and data</strong>. Sharing these
+        experiences helps the community avoid unproductive paths, clarify failure modes and boundary
+        conditions, and build a culture of transparency.
+      </p>
+      <p>To this aim, we invite submissions that:</p>
+      <ul>
+        <li>
+          Showcase and investigate important limitations of current AI systems in biological settings,
+          including pitfalls in common modeling approaches and evaluations of real-world or
+          deployment-relevant applications.
+        </li>
+        <li>
+          Attempt promising ideas to overcome common challenges but fall short of expected gains,
+          accompanied by analyses that clarify failure modes and boundary conditions.
+        </li>
+      </ul>
       <p>
         We welcome empirical negative results, unexpected model behavior, and careful analyses of
         distribution shift, confounding, weak supervision, resource constraints, benchmark misalignment,
         uncertainty, causal learning, and adaptive strategies in biological applications.
       </p>
+
       <h2>Full papers</h2>
-      <p>Full submissions may use up to eight pages, excluding references and appendices, and should include:</p>
+      <p>
+        Full submissions may use up to eight pages, excluding references and appendices. Submitted papers
+        should contain the following:
+      </p>
       <ul>
-        <li>A clear biological task, data modality, and modeling approach.</li>
-        <li>Empirical or theoretical evidence of a negative or unexpected outcome.</li>
-        <li>Analysis of the model, data, experimental, or deployment causes.</li>
-        <li>Reproducible and well-documented results.</li>
+        <li>
+          <strong>Problem.</strong> A clearly specified biological task, data modality, and setting, with
+          assumptions, target metrics, and desired improvements precisely stated.
+        </li>
+        <li>
+          <strong>Proposed approach.</strong> The modeling approach or solution under investigation,
+          including its core mechanism, required preconditions, and the hypotheses under which it is
+          expected to work.
+        </li>
+        <li>
+          <strong>Observed outcome.</strong> A concise description of the negative, null, or unexpected
+          outcome, with quantitative evidence where possible (metrics, uncertainty, compute budget,
+          data/seed details).
+        </li>
+        <li>
+          <strong>Reason for failure.</strong> An investigation of why the approach did not work as
+          hoped, for example dataset artifacts, modeling choices, confounding, shortcut cues, distribution shift,
+          weak supervision, evaluation mismatches, or deployment constraints, supported by diagnostics
+          or ablations and ending with boundary conditions and actionable takeaways.
+        </li>
       </ul>
+
+      <h2>Topics</h2>
+      <p>Around these negative results, topics of interest include (but are not limited to):</p>
+      <ul>
+        {workshop.topics.map((topic) => <li>{topic}</li>)}
+      </ul>
+
       <h2>Tiny papers</h2>
       <p>
-        Tiny papers may use up to four pages. They must state the problem and provide empirical evidence
-        of at least one negative outcome, even when the full causal analysis is still developing.
+        Tiny papers may use up to four pages of main text, with the same formatting instructions as full
+        submissions. They are not required to contain all four elements above, but must state the problem
+        and provide evidence of at least one negative or unexpected outcome, even when the full causal
+        analysis is still developing.
       </p>
+
       <h2>Formatting and review</h2>
       <ul>
-        <li>Use the NeurIPS 2026 LaTeX style.</li>
-        <li>Submissions are double-blind; linked material must also preserve anonymity.</li>
+        <li>
+          Use the workshop LaTeX template: <a href={latexTemplateUrl} target="_blank" rel="noreferrer">download style files</a>.
+        </li>
+        <li>
+          Submit on <a href={openReviewUrl} target="_blank" rel="noreferrer">OpenReview</a>. Submissions are
+          double-blind; linked material must also preserve anonymity.
+        </li>
+        <li>
+          Authors may include unlimited appendices, but reviewers are not required to read.
+        </li>
+        <li>
+          Disclose any use of large language models (LLMs) with a short paragraph describing their role.
+          We also recommend ethics and reproducibility statements; these do not count toward the page
+          limit. See the <a href="https://neurips.cc/public/EthicsGuidelines" target="_blank" rel="noreferrer">NeurIPS Code of Ethics</a> for guidance.
+        </li>
         <li>Accepted papers will appear on OpenReview, and the workshop remains non-archival.</li>
         <li>Concurrent submissions are welcome when they comply with the target venue’s policy.</li>
+        <li>We welcome first-time authors. The workshop will be held in person.</li>
       </ul>
+
       <h2>Eligibility</h2>
       <p>
         Submissions are considered only if the work has not been accepted for publication in previous
         conference proceedings.
       </p>
+
       <h2>Evaluation criteria</h2>
       <ul>
         <li>Clarity of the problem and claims.</li>
@@ -78,15 +154,28 @@ const submissionDeadlineNote = submissionNote.replace(/\bAoE\b/, 'Anywhere on Ea
         <li>Faithfulness to the biological setting.</li>
         <li>Depth of failure analysis.</li>
         <li>Quality of empirical documentation.</li>
+        <li>Novelty and significance of the insights.</li>
+        <li>Quality of discussion of limitations.</li>
       </ul>
+      <p>
+        Reviewers may nominate papers for spotlight or contributed talks, as well as the Entropic Award
+        (most surprising negative result) and the Didactic Award (most well-explained and pedagogical
+        paper).
+      </p>
+
       <h2>Tentative dates</h2>
       <dl class="definition-list">
         <div><dt>Submission</dt><dd>{submissionDate.value}</dd></div>
         <div><dt>Review</dt><dd>{reviewDate.value}</dd></div>
         <div><dt>Notification</dt><dd>{notificationDate.value}</dd></div>
         <div><dt>Camera-ready & poster</dt><dd>{cameraReadyDate.value}</dd></div>
+        <div><dt>In-person workshop</dt><dd>{workshopDate.value}</dd></div>
       </dl>
       <p>All deadlines are {submissionDeadlineNote}.</p>
+      <p>
+        Updates will be posted on this website. For questions, please contact {workshop.contact}. We look
+        forward to your submission.
+      </p>
     </div>
   </Section>
 </SiteLayout>

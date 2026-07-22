@@ -54,7 +54,7 @@ export const workshop = {
     { label: 'Review period', value: 'August 29 - September 21, 2026', tentative: true },
     { label: 'Acceptance notification', value: 'September 29, 2026', tentative: true },
     { label: 'Camera-ready & poster', value: 'October 20, 2026', tentative: true },
-    { label: 'In-person workshop', value: 'December 11-12, 2026', note: 'Sydney, Australia · exact date to be confirmed', tentative: true },
+    { label: 'In-person workshop', value: 'December 11/12, 2026', note: 'Sydney, Australia · exact date to be confirmed', tentative: true },
   ],
   topics: [
     'Out-of-distribution generalization and domain shift',
@@ -64,7 +64,7 @@ export const workshop = {
     'Interpretability and trustworthy biological inference',
     'Learning with limited data and distribution shift',
     'Deployment-relevant evaluation beyond benchmarks',
-    'Limits of foundation, multimodal, and agentic models',
+    'Limits of foundation, multimodal, and agentic models for biology',
     'Causal intervention and experimental design',
   ],
   schedule: [

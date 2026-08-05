@@ -77,9 +77,17 @@ const latexTemplateUrl =
         uncertainty, causal learning, and adaptive strategies in biological applications.
       </p>
 
-      <h2>Full papers</h2>
+      <h2>Topics</h2>
+      <p>Around these negative results, topics of interest include (but are not limited to):</p>
+      <ul>
+        {workshop.topics.map((topic) => <li>{topic}</li>)}
+      </ul>
+
+      <h2>Formats</h2>
+
+      <h3>Full papers</h3>
       <p>
-        Full submissions may use up to eight pages, excluding references and appendices. Submitted papers
+        Full submissions may use up to <strong>eight pages</strong>, excluding references and appendices. Submitted papers
         should contain the following:
       </p>
       <ul>
@@ -105,15 +113,9 @@ const latexTemplateUrl =
         </li>
       </ul>
 
-      <h2>Topics</h2>
-      <p>Around these negative results, topics of interest include (but are not limited to):</p>
-      <ul>
-        {workshop.topics.map((topic) => <li>{topic}</li>)}
-      </ul>
-
-      <h2>Tiny papers</h2>
+      <h3>Tiny papers</h3>
       <p>
-        Tiny papers may use up to four pages of main text, with the same formatting instructions as full
+        Tiny papers may use up to <strong>four pages</strong> of main text, with the same formatting instructions as full
         submissions. They are not required to contain all four elements above, but must state the problem
         and provide evidence of at least one negative or unexpected outcome, even when the full causal
         analysis is still developing.
@@ -144,7 +146,8 @@ const latexTemplateUrl =
       <h2>Eligibility</h2>
       <p>
         Submissions are considered only if the work has not been accepted for publication in previous
-        conference proceedings.
+        conference proceedings. Work that is concurrently under review for the NeurIPS 2026 main track
+        is welcome.
       </p>
 
       <h2>Evaluation criteria</h2>

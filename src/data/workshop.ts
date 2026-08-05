@@ -83,17 +83,18 @@ export const workshop = {
     { time: '16:30–17:00', title: 'Closing synthesis', category: 'community' },
   ] satisfies ScheduleItem[],
   speakers: [
-    // {
-    //   name: 'Anshul Kundaje',
-    //   initials: 'AK',
-    //   affiliation: 'Stanford University',
-    //   focus: 'Regulatory genomics · Real-world deployment',
-    //   bio: 'Develops deep-learning methods and interpretation frameworks for biological sequences, molecular interactions, and genetic variation.',
-    //   links: [
-    //     { label: 'Homepage', href: 'https://profiles.stanford.edu/anshul-kundaje' },
-    //     { label: 'ORCID', href: 'https://orcid.org/0000-0003-3084-2287' },
-    //   ],
-    // },
+    {
+      name: 'Anshul Kundaje',
+      initials: 'AK',
+      photo: '/images/speakers/anshul-kundaje.jpg',
+      affiliation: 'Stanford University',
+      focus: 'Regulatory genomics · Real-world deployment',
+      bio: 'Develops deep-learning methods and interpretation frameworks for biological sequences, molecular interactions, and genetic variation.',
+      links: [
+        { label: 'Homepage', href: 'https://profiles.stanford.edu/anshul-kundaje' },
+        { label: 'ORCID', href: 'https://orcid.org/0000-0003-3084-2287' },
+      ],
+    },
     // {
     //   name: 'Marzyeh Ghassemi',
     //   initials: 'MG',

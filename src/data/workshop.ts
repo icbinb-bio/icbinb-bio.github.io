@@ -95,6 +95,19 @@ export const workshop = {
         { label: 'ORCID', href: 'https://orcid.org/0000-0003-3084-2287' },
       ],
     },
+    {
+      name: 'Caroline Uhler',
+      initials: 'CU',
+      photo: '/images/speakers/caroline-uhler.jpg',
+      affiliation: 'MIT - Broad Institute (EWSC)',
+      focus: 'Causal inference · Multimodal learning · Active learning',
+      bio: 'Caroline’s research lies at the intersection of machine learning, statistics, and genomics, with a particular focus on causal inference, representation learning, and gene regulation.',
+      links: [
+        { label: 'Homepage', href: 'https://www.carolineuhler.com/caroline-uhler' },
+        { label: 'ORCID', href: 'https://orcid.org/0000-0002-7008-0216' },
+      ],
+    },
+
     // {
     //   name: 'Marzyeh Ghassemi',
     //   initials: 'MG',

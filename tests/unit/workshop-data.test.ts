@@ -50,9 +50,12 @@ describe('workshop data', () => {
     expect(JSON.stringify(workshop.organizers)).not.toMatch(/@/);
   });
 
-  test('marks every unresolved date explicitly', () => {
+  test('marks only unresolved dates as tentative', () => {
     expect(workshop.dates).toHaveLength(5);
-    expect(workshop.dates.every(({ tentative }) => tentative)).toBe(true);
+    expect(workshop.dates.filter(({ tentative }) => tentative).map(({ label }) => label)).toEqual([
+      'Camera-ready & poster',
+      'In-person workshop',
+    ]);
     expect(workshop.venue.status).toBe('To be announced');
     expect(workshop.venue.noticeLabel).toBe('Date and venue to be announced');
     expect(workshop.venue.publicDetail).toBe(

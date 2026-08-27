@@ -502,16 +502,16 @@ test('publishes submission eligibility and all evaluation criteria', () => {
   }
 });
 
-test('announces papers and program decisions only after the tentative notification date', () => {
+test('announces papers and program decisions only after the notification date', () => {
   const html = htmlFor('/papers/');
   const text = visibleTextFor(html);
   const source = readFileSync(resolve('src/pages/papers.astro'), 'utf8');
 
   expect(text).toContain(
-    'Papers, spotlights, posters, and awards will be announced after the tentative notification date, currently September 29, 2026.',
+    'Papers, spotlights, posters, and awards will be announced after the notification date, September 29, 2026.',
   );
   expect(text).not.toMatch(/announcements begin|announced on September 29/i);
-  expect(source).toContain('notificationDate.tentative');
+  expect(source).not.toContain('notificationDate.tentative');
 });
 
 test('renders the Schedule notice directly from centralized venue presentation fields', () => {

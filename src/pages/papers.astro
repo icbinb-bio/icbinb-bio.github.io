@@ -14,9 +14,6 @@ const requireDate = (label: PapersDateLabel) => {
 };
 
 const notificationDate = requireDate('Acceptance notification');
-if (!notificationDate.tentative) {
-  throw new Error('Acceptance notification must remain tentative until organizers confirm it');
-}
 ---
 
 <SiteLayout title="Papers | ICBINB-BIO 2026" description="Accepted ICBINB-BIO papers and awards.">
@@ -27,8 +24,8 @@ if (!notificationDate.tentative) {
   />
   <Section narrow>
     <Notice label="Forthcoming after notification">
-      Papers, spotlights, posters, and awards will be announced after the tentative notification date,
-      currently {notificationDate.value}.
+      Papers, spotlights, posters, and awards will be announced after the notification date,
+      {notificationDate.value}.
     </Notice>
     <p class="centered"><a class="button-link" href="/submit/">View submission details</a></p>
   </Section>

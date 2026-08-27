@@ -50,8 +50,19 @@ export const workshop = {
     { label: 'ICBINB', href: 'https://icbinb.cc/', external: true },
   ] satisfies NavItem[],
   dates: [
-    { label: 'Paper submission', value: 'August 29, 2026', note: '11:59 p.m. AoE', tentative: true },
-    { label: 'Review period', value: 'August 29 - September 21, 2026', tentative: true },
+    {
+      label: 'Paper submission',
+      previousValue: 'August 29, 2026',
+      value: 'September 2, 2026',
+      note: '11:59 p.m. AoE',
+      tentative: true,
+    },
+    {
+      label: 'Review period',
+      previousValue: 'August 29 - September 21, 2026',
+      value: 'September 2, 2026 - September 21, 2026',
+      tentative: true,
+    },
     { label: 'Acceptance notification', value: 'September 29, 2026', tentative: true },
     { label: 'Camera-ready & poster', value: 'October 20, 2026', tentative: true },
     { label: 'In-person workshop', value: 'December 11 or 12, 2026', note: 'Sydney, Australia · exact date to be confirmed', tentative: true },

@@ -8,6 +8,9 @@ import { workshop } from '../data/workshop';
 const [headlinePrefix, headlineSuffix] = workshop.name.split(': ');
 const [taglinePrefix, taglineSuffix] = workshop.tagline.split('~');
 const cleanTagline = workshop.tagline.replaceAll('~', '');
+const paperSubmissionPortal =
+  'https://openreview.net/group?id=NeurIPS.cc/2026/Workshop/ICBINB-BIO&referrer=%5BHomepage%5D(%2F)#tab-your-consoles';
+const twitterUrl = 'https://x.com/icbinbbio';
 ---
 
 <SiteLayout title={`${workshop.shortName} | NeurIPS 2026`} description={cleanTagline}>
@@ -28,6 +31,21 @@ const cleanTagline = workshop.tagline.replaceAll('~', '');
       <p class="tagline">{taglinePrefix}<br />{taglineSuffix}</p>
     </div>
   </div>
+
+  <Section narrow labelledby="news">
+    <div class="section-heading">
+      <h2 id="news">News</h2>
+    </div>
+    <ul class="news-list">
+      <li>The paper submission deadline has been extended to September 2, 2026.</li>
+      <li>
+        Submit your paper through the{' '}
+        <a href={paperSubmissionPortal} target="_blank" rel="noreferrer">OpenReview portal</a>{' '}
+        and follow <a href={twitterUrl} target="_blank" rel="noreferrer">@icbinbbio</a> for{' '}
+        updates.
+      </li>
+    </ul>
+  </Section>
 
   <Section labelledby="key-dates">
     <div class="section-heading centered">

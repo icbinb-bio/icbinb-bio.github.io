@@ -168,7 +168,14 @@ const reviewDate = requireDate('Review period');
       </p>
 
       <h2>Review timeline</h2>
-      <p>The tentative review period is {reviewDate.value}.</p>
+      <p>
+        The tentative review period is{' '}
+        <span class="inline-date-update">
+          {'previousValue' in reviewDate &&
+            reviewDate.previousValue && <del>{reviewDate.previousValue}</del>}
+          <span class="current-date">{reviewDate.value}</span>
+        </span>.
+      </p>
 
       <h2>Program committee</h2>
       <p>Full public names and profile links will be announced after confirmation.</p>

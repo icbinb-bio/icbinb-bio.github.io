@@ -27,7 +27,8 @@ const submissionNote = 'note' in submissionDate ? submissionDate.note : undefine
 if (!submissionNote) throw new Error('Missing required workshop date note: Paper submission');
 const submissionDeadlineNote = submissionNote.replace(/\bAoE\b/, 'Anywhere on Earth');
 
-const openReviewUrl = 'https://openreview.net/group?id=NeurIPS.cc/2026/Workshop/ICBINB-BIO';
+const openReviewUrl =
+  'https://openreview.net/group?id=NeurIPS.cc/2026/Workshop/ICBINB-BIO&referrer=%5BHomepage%5D(%2F)#tab-your-consoles';
 const latexTemplateUrl =
   'https://drive.google.com/file/d/1YM_VG1bk6mokRHFwC69Z_nJnAJFvbHu0/view?usp=drive_link';
 ---
@@ -44,7 +45,12 @@ const latexTemplateUrl =
   <Section narrow>
     <Notice label="OpenReview is open">
       Submit via the <a href={openReviewUrl} target="_blank" rel="noreferrer">ICBINB-BIO OpenReview portal</a>. The
-      submission deadline is {submissionDate.value}.
+      submission deadline is{' '}
+      <span class="inline-date-update">
+        {'previousValue' in submissionDate &&
+          submissionDate.previousValue && <del>{submissionDate.previousValue}</del>}
+        <span class="current-date">{submissionDate.value}</span>
+      </span>.
     </Notice>
     <p class="centered">
       <a class="button-link" href={openReviewUrl} target="_blank" rel="noreferrer">Submit on OpenReview</a>
@@ -168,8 +174,22 @@ const latexTemplateUrl =
 
       <h2>Tentative dates</h2>
       <dl class="definition-list">
-        <div><dt>Submission</dt><dd>{submissionDate.value}</dd></div>
-        <div><dt>Review</dt><dd>{reviewDate.value}</dd></div>
+        <div>
+          <dt>Submission</dt>
+          <dd class="inline-date-update">
+            {'previousValue' in submissionDate &&
+              submissionDate.previousValue && <del>{submissionDate.previousValue}</del>}
+            <span class="current-date">{submissionDate.value}</span>
+          </dd>
+        </div>
+        <div>
+          <dt>Review</dt>
+          <dd class="inline-date-update">
+            {'previousValue' in reviewDate &&
+              reviewDate.previousValue && <del>{reviewDate.previousValue}</del>}
+            <span class="current-date">{reviewDate.value}</span>
+          </dd>
+        </div>
         <div><dt>Notification</dt><dd>{notificationDate.value}</dd></div>
         <div><dt>Camera-ready & poster</dt><dd>{cameraReadyDate.value}</dd></div>
         <div><dt>In-person workshop</dt><dd>{workshopDate.value}</dd></div>

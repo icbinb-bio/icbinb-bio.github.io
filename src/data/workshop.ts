@@ -116,6 +116,18 @@ export const workshop = {
         { label: 'ORCID', href: 'https://orcid.org/0000-0002-7008-0216' },
       ],
     },
+    {
+      name: 'Barbara Engelhardt',
+      initials: 'BE',
+      photo: '/images/speakers/barbara-engelhardt.jpg',
+      affiliation: 'Stanford University - Gladstone Institutes ',
+      focus: 'Bayesian ML · Computational genomics · Experimental design',
+      bio: 'Barbara E Engelhardt is a Senior Investigator at Gladstone Institutes and Professor at Stanford University in the Department of Biomedical Data Science. She received her B.S. (Symbolic Systems) and M.S. (Computer Science) from Stanford University and her PhD from UC Berkeley (EECS) advised my Prof. Michael I Jordan. She was a postdoctoral fellow with Prof. Matthew Stephens at the University of Chicago. She was an Assistant Professor at Duke University from 2011-2014, and an Assistant, Associate, and then Full Professor at Princeton University in Computer Science from 2014-2022. She has worked at Jet Propulsion Labs, Google Research, 23andMe, and Genomics plc. In her career, she received an NSF GRFP, the Google Anita Borg Scholarship, the SMBE Walter M. Fitch Prize (2004), a Sloan Faculty Fellowship, an NSF CAREER, and the ISCB Overton Prize (2021). Her research is focused on developing and applying models for structured biomedical data that capture patterns in the data, predict results of interventions to the system, assist with decision-making support, and prioritize experiments for design and engineering of biological systems.',
+      links: [
+        { label: 'Homepage', href: 'https://profiles.stanford.edu/barbara-engelhardt' },
+        { label: 'ORCID', href: 'https://orcid.org/0000-0002-6139-7334' },
+      ],
+    },
 
     // {
     //   name: 'Marzyeh Ghassemi',

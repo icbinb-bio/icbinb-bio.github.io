@@ -62,7 +62,13 @@ export const workshop = {
       value: 'September 2, 2026 - September 21, 2026',
     },
     { label: 'Acceptance notification', value: 'September 29, 2026' },
-    { label: 'Camera-ready & poster', value: 'October 20, 2026', tentative: true },
+    {
+      label: 'Camera-ready & poster',
+      previousValue: 'October 20, 2026',
+      value: 'November 11, 2026',
+      note: '11:59 p.m. AoE',
+      tentative: true,
+    },
     { label: 'In-person workshop', value: 'December 11 or 12, 2026', note: 'Sydney, Australia · exact date to be confirmed', tentative: true },
   ],
   topics: [

@@ -33,11 +33,11 @@ export const workshop = {
     'Stress-testing AI for biology in the real world ~failure modes, robustness, and trustworthy scientific discovery~',
   contact: 'icbinbbio@gmail.com',
   venue: {
-    month: 'December 11 or 12, 2026',
-    status: 'To be announced',
-    detail: 'Sydney, Australia · exact date to be confirmed',
-    noticeLabel: 'Exact date to be confirmed',
-    publicDetail: 'The exact date (December 11 or 12), venue, room, and local timezone will be announced.',
+    month: 'December 11, 2026',
+    status: 'Confirmed',
+    detail: 'Sydney, Australia · 8:50 a.m.–5:00 p.m. Australia time',
+    noticeLabel: 'Workshop Date and Time',
+    publicDetail: 'The workshop will run from 8:50 a.m. to 5:00 p.m. Australia time.',
   },
   navigation: [
     { label: 'Home', href: '/' },
@@ -69,7 +69,7 @@ export const workshop = {
       note: '11:59 p.m. AoE',
       tentative: true,
     },
-    { label: 'In-person workshop', value: 'December 11 or 12, 2026', note: 'Sydney, Australia · exact date to be confirmed', tentative: true },
+    { label: 'In-person workshop', value: 'December 11, 2026', note: 'Sydney, Australia · 8:50 a.m.–5:00 p.m. Australia time' },
   ],
   topics: [
     'Out-of-distribution generalization and domain shift',

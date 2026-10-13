@@ -10,6 +10,7 @@ const [taglinePrefix, taglineSuffix] = workshop.tagline.split('~');
 const cleanTagline = workshop.tagline.replaceAll('~', '');
 const paperSubmissionPortal =
   'https://openreview.net/group?id=NeurIPS.cc/2026/Workshop/ICBINB-BIO&referrer=%5BHomepage%5D(%2F)#tab-your-consoles';
+const neuripsPortalUrl = 'https://neurips.cc/virtual/2026/loc/sydney/workshop/137508';
 const twitterUrl = 'https://x.com/icbinbbio';
 ---
 
@@ -37,6 +38,10 @@ const twitterUrl = 'https://x.com/icbinbbio';
       <h2 id="news">News</h2>
     </div>
     <ul class="news-list">
+      <li>
+        The list of accepted papers and the workshop schedule is available on the{' '}
+        <a href={neuripsPortalUrl} target="_blank" rel="noreferrer">NeurIPS portal</a>.
+      </li>
       <li>The paper submission deadline has been extended to September 2, 2026.</li>
       <li>
         Submit your paper through the{' '}

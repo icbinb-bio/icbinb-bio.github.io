@@ -21,9 +21,9 @@ const expectedNavigation = [
   { label: 'ICBINB', href: 'https://icbinb.cc/' },
 ];
 
-const expectedVenueNoticeLabel = 'Date and venue to be announced';
+const expectedVenueNoticeLabel = 'Workshop Date and Time';
 const expectedVenuePublicDetail =
-  'The exact workshop date, city, venue, room, and local timezone will be announced.';
+  'The workshop will run from 8:50 a.m. to 5:00 p.m. Australia time.';
 
 const htmlFor = (route: string) => {
   const relativePath = route === '/' ? 'index.html' : `${route.replace(/^\/|\/$/g, '')}/index.html`;
@@ -325,14 +325,15 @@ describe('generated site shell', () => {
 
   test('labels dates and location honestly', () => {
     const html = htmlFor('/');
-    expect(html.match(/Tentative/g)?.length).toBeGreaterThanOrEqual(5);
-    expect(html).toContain('Exact date and location to be announced');
+    expect(html.match(/Tentative/g)?.length).toBeGreaterThanOrEqual(1);
+    expect(html).toContain('December 11, 2026');
+    expect(html).toContain('8:50 a.m.–5:00 p.m. Australia time');
   });
 });
 
 const administrativeRoutes = [
   ['/submit/', 'Call for Papers'],
-  ['/schedule/', 'Tentative Schedule'],
+  ['/schedule/', 'Schedule'],
   ['/papers/', 'Papers'],
   ['/reviewer-guidelines/', 'Reviewer Guidelines'],
 ] as const;
@@ -356,7 +357,7 @@ const publicRouteMetadata = [
   [
     '/schedule/',
     'Schedule | ICBINB-BIO 2026',
-    'Tentative full-day ICBINB-BIO workshop schedule.',
+    'Full-day ICBINB-BIO workshop schedule.',
   ],
   ['/papers/', 'Papers | ICBINB-BIO 2026', 'Accepted ICBINB-BIO papers and awards.'],
   [
@@ -389,22 +390,18 @@ test.each([
       'October 20, 2026',
       'November 11, 2026',
       'December 11 or 12, 2026',
+      'December 11, 2026',
       'December 11/12, 2026',
       'December 11-12, 2026',
+      '8:50 a.m.–5:00 p.m. Australia time',
     ],
     ['.value', '.note'],
   ],
   [
     'src/pages/schedule.astro',
     ['In-person workshop'],
-    ['December 2026'],
+    ['December 11, 2026', '8:50 a.m.–5:00 p.m. Australia time'],
     ['.value', '.note'],
-  ],
-  [
-    'src/pages/papers.astro',
-    ['Acceptance notification'],
-    ['September 29, 2026'],
-    ['.value'],
   ],
   [
     'src/pages/reviewer-guidelines.astro',
@@ -503,16 +500,52 @@ test('publishes submission eligibility and all evaluation criteria', () => {
   }
 });
 
-test('announces papers and program decisions only after the notification date', () => {
-  const html = htmlFor('/papers/');
+test.each(['/', '/papers/'] as const)('links %s to the NeurIPS portal for papers and schedule', (route) => {
+  const html = htmlFor(route);
   const text = visibleTextFor(html);
-  const source = readFileSync(resolve('src/pages/papers.astro'), 'utf8');
 
   expect(text).toContain(
-    'Papers, spotlights, posters, and awards will be announced after the notification date, September 29, 2026.',
+    'The list of accepted papers and the workshop schedule is available on the NeurIPS portal.',
   );
-  expect(text).not.toMatch(/announcements begin|announced on September 29/i);
-  expect(source).not.toContain('notificationDate.tentative');
+  expect(linkHrefsFor(html)).toContain(
+    'https://neurips.cc/virtual/2026/loc/sydney/workshop/137508',
+  );
+});
+
+test('renders accepted spotlight papers', () => {
+  const html = htmlFor('/papers/');
+  const text = visibleTextFor(html);
+
+  expect(text).toContain('Spotlight Papers');
+  for (const [title, href] of [
+    [
+      'Knowledge graphs beat foundation models for gene perturbation prediction, but only the non-causal ones.',
+      'https://neurips.cc/virtual/2026/169450',
+    ],
+    [
+      'Open-Weight MLLMs Cannot Compare What They Cannot Name',
+      'https://neurips.cc/virtual/2026/169426',
+    ],
+    [
+      'Treating the Symptom, Missing the Cause: Anatomy of a Scientific Reasoning Failure',
+      'https://neurips.cc/virtual/2026/169436',
+    ],
+    [
+      'Causal variant underestimation is a major overlooked driver of sequence-to-function model underperformance',
+      'https://neurips.cc/virtual/2026/169406',
+    ],
+    [
+      'Misalignments in Generative Protein Design: Thermodynamic Filtering Fails to Predict Specificity',
+      'https://neurips.cc/virtual/2026/169461',
+    ],
+    [
+      'Sparse crosscoders identify antibody features gained during fine-tuning of protein language models',
+      'https://neurips.cc/virtual/2026/169457',
+    ],
+  ] as const) {
+    expect(text).toContain(title);
+    expect(linkHrefsFor(html)).toContain(href);
+  }
 });
 
 test('renders the Schedule notice directly from centralized venue presentation fields', () => {
@@ -521,7 +554,9 @@ test('renders the Schedule notice directly from centralized venue presentation f
   const source = readFileSync(resolve('src/pages/schedule.astro'), 'utf8');
 
   expect(text).toContain(expectedVenueNoticeLabel);
-  expect(text).toContain(`${workshop.venue.month}. ${expectedVenuePublicDetail}`);
+  expect(text).toContain(
+    `${workshop.venue.month} in Sydney, Australia. ${expectedVenuePublicDetail}`,
+  );
   expect(source).toContain('workshopDate.value !== workshop.venue.month');
   expect(source).toContain('workshop.venue.noticeLabel');
   expect(source).toContain('workshop.venue.publicDetail');

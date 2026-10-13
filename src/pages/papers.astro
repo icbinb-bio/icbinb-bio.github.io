@@ -3,30 +3,67 @@ import Notice from '../components/Notice.astro';
 import PageIntro from '../components/PageIntro.astro';
 import Section from '../components/Section.astro';
 import SiteLayout from '../layouts/SiteLayout.astro';
-import { workshop } from '../data/workshop';
 
-type PapersDateLabel = 'Acceptance notification';
-
-const requireDate = (label: PapersDateLabel) => {
-  const date = workshop.dates.find((item) => item.label === label);
-  if (!date) throw new Error(`Missing required workshop date: ${label}`);
-  return date;
-};
-
-const notificationDate = requireDate('Acceptance notification');
+const neuripsPortalUrl = 'https://neurips.cc/virtual/2026/loc/sydney/workshop/137508';
+const spotlightPapers = [
+  {
+    title: 'Knowledge graphs beat foundation models for gene perturbation prediction, but only the non-causal ones.',
+    href: 'https://neurips.cc/virtual/2026/169450',
+    authors: 'Sebastien Boyer ⋅ AMIAUD--PLACHY Ilann ⋅ Oliver Bent',
+  },
+  {
+    title: 'Open-Weight MLLMs Cannot Compare What They Cannot Name',
+    href: 'https://neurips.cc/virtual/2026/169426',
+    authors: 'Wenxin Su ⋅ Anna Kreshuk',
+  },
+  {
+    title: 'Treating the Symptom, Missing the Cause: Anatomy of a Scientific Reasoning Failure',
+    href: 'https://neurips.cc/virtual/2026/169436',
+    authors: 'Anna Gogleva ⋅ Martin Balla ⋅ Thomas Charman ⋅ Karl Gemayel',
+  },
+  {
+    title: 'Causal variant underestimation is a major overlooked driver of sequence-to-function model underperformance',
+    href: 'https://neurips.cc/virtual/2026/169406',
+    authors: 'Shiron Drusinsky ⋅ Katherine S Pollard',
+  },
+  {
+    title: 'Misalignments in Generative Protein Design: Thermodynamic Filtering Fails to Predict Specificity',
+    href: 'https://neurips.cc/virtual/2026/169461',
+    authors: 'Safwan Diwan ⋅ Mattias Tolhurst ⋅ Jeff Nivala',
+  },
+  {
+    title: 'Sparse crosscoders identify antibody features gained during fine-tuning of protein language models',
+    href: 'https://neurips.cc/virtual/2026/169457',
+    authors: 'Wiona Glänzer ⋅ Sai Reddy ⋅ Alexander Yermanos',
+  },
+];
 ---
 
 <SiteLayout title="Papers | ICBINB-BIO 2026" description="Accepted ICBINB-BIO papers and awards.">
   <PageIntro
     eyebrow="Workshop program"
     title="Accepted Papers"
-    lead="Accepted work will be collected here after decisions are released."
+    lead="Accepted spotlight papers for ICBINB-BIO at NeurIPS 2026."
   />
   <Section narrow>
-    <Notice label="Forthcoming after notification">
-      Papers, spotlights, posters, and awards will be announced after the notification date,
-      {notificationDate.value}.
+    <Notice label="Program available">
+      The list of accepted papers and the workshop schedule is available on the{' '}
+      <a href={neuripsPortalUrl} target="_blank" rel="noreferrer">NeurIPS portal</a>.
     </Notice>
+    <div class="prose">
+      <h2>Spotlight Papers</h2>
+      <ul>
+        {spotlightPapers.map((paper) => (
+          <li>
+            <a href={paper.href} target="_blank" rel="noreferrer">
+              {paper.title}
+            </a>
+            <br />
+            {paper.authors}
+          </li>
+        ))}
+      </ul>
+    </div>
     <p class="centered"><a class="button-link" href="/submit/">View submission details</a></p>
   </Section>
 </SiteLayout>

@@ -25,15 +25,15 @@ if (workshopNote !== workshop.venue.detail) {
 }
 ---
 
-<SiteLayout title="Schedule | ICBINB-BIO 2026" description="Tentative full-day ICBINB-BIO workshop schedule.">
+<SiteLayout title="Schedule | ICBINB-BIO 2026" description="Full-day ICBINB-BIO workshop schedule.">
   <PageIntro
     eyebrow="Full-day workshop"
-    title="Tentative Schedule"
+    title="Schedule"
     lead="Talks, posters, and moderated discussion are structured around collective failure analysis."
   />
   <Section narrow>
     <Notice label={workshop.venue.noticeLabel}>
-      The workshop will take place in {workshop.venue.month}. {workshop.venue.publicDetail}
+      The workshop will take place on {workshop.venue.month} in Sydney, Australia. {workshop.venue.publicDetail}
     </Notice>
     <ScheduleTimeline />
   </Section>

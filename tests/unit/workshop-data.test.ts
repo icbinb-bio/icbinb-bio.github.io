@@ -54,12 +54,11 @@ describe('workshop data', () => {
     expect(workshop.dates).toHaveLength(5);
     expect(workshop.dates.filter(({ tentative }) => tentative).map(({ label }) => label)).toEqual([
       'Camera-ready & poster',
-      'In-person workshop',
     ]);
-    expect(workshop.venue.status).toBe('To be announced');
-    expect(workshop.venue.noticeLabel).toBe('Date and venue to be announced');
+    expect(workshop.venue.status).toBe('Confirmed');
+    expect(workshop.venue.noticeLabel).toBe('Workshop Date and Time');
     expect(workshop.venue.publicDetail).toBe(
-      'The exact workshop date, city, venue, room, and local timezone will be announced.',
+      'The workshop will run from 8:50 a.m. to 5:00 p.m. Australia time.',
     );
     expect(workshop.dates.find(({ label }) => label === 'In-person workshop')?.value).toBe(
       workshop.venue.month,
